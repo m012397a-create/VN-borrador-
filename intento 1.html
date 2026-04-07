@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaturaVida | Tienda Naturista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-pro: #1b4332;
+            --verde-medio: #2d6a4f;
+            --verde-vida: #52b788;
+            --blanco: #ffffff;
+            --gris: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: var(--gris);
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        header {
+            background: var(--blanco);
+            padding: 1rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--verde-pro); }
+        nav a { text-decoration: none; color: var(--verde-pro); margin-left: 20px; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: var(--verde-vida); }
+
+        /* --- BANNER PRINCIPAL (LA IMAGEN DEL ÁRBOL) --- */
+        .hero {
+            height: 350px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1500');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
+
+        /* --- SECCIÓN NOSOTROS (OBJETIVOS) --- */
+        .about-section {
+            padding: 4rem 8%;
+            background: var(--blanco);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .about-item i { font-size: 2.5rem; color: var(--verde-vida); margin-bottom: 15px; }
+        .about-item h3 { color: var(--verde-pro); margin-bottom: 10px; }
+        .about-item p { color: #666; font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- CATÁLOGO --- */
+        .catalog-container { padding: 4rem 8%; }
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--verde-pro); margin-bottom: 3rem; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
+
+        .product-info { padding: 20px; text-align: center; flex-grow: 1; }
+        .product-info h3 { margin: 10px 0; color: var(--verde-pro); font-size: 1.1rem; min-height: 2.5rem; }
+        .product-info p { color: #777; font-size: 0.85rem; margin-bottom: 15px; }
+        
+        .price { font-size: 1.3rem; color: var(--verde-medio); font-weight: 800; margin-bottom: 15px; }
+
+        .btn-buy {
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            margin: 0 20px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: #128c7e; }
+
+        /* --- BOTÓN FLOTANTE --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+        }
+
+        footer { background: var(--verde-pro); color: white; padding: 2.5rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🌿 NaturaVida</div>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#catalogo">Catálogo</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Tu Salud, Nuestra Pasión</h1>
+        <p>Suplementos 100% naturales para una vida plena.</p>
+    </section>
+
+    <!-- Sección Objetivos (Nosotros) -->
+    <section class="about-section" id="nosotros">
+        <div class="about-item">
+            <i class="fas fa-leaf"></i>
+            <h3>Origen Natural</h3>
+            <p>Seleccionamos ingredientes puros directamente de la tierra para garantizar la máxima calidad en cada producto.</p>
+        </div>
+        <div class="about-item">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Misión Bienestar</h3>
+            <p>Buscamos mejorar tu calidad de vida ofreciendo alternativas naturales efectivas y accesibles para todos.</p>
+        </div>
+        <div class="about-item">
+            <i class="fas fa-shipping-fast"></i>
+            <h3>Atención Directa</h3>
+            <p>Te asesoramos personalmente por WhatsApp para resolver tus dudas y gestionar tus pedidos rápidamente.</p>
+        </div>
+    </section>
+
+    <!-- Sección Catálogo -->
+    <main class="catalog-container" id="catalogo">
+        <h2 class="section-title">Nuestro Catálogo Completo</h2>
+        <div class="products-grid" id="main-grid">
+            <!-- Se cargan 200 productos aquí -->
+        </div>
+    </main>
+
+    <script>
+        // Lista de bases para generar los 200 productos
+        const bases = [
+            "Sangre de Drago", "Jarabe de Totumo", "Ajo Rey", "Ortiga Mas", "Citrato de Magnesio", 
+            "Uña de Gato", "Chanca Piedra", "Cola de Caballo", "Propóleo Real", "Veneno de Abeja",
+            "Cartílago de Tiburón", "Maca Negra", "Maca Roja", "Ginkgo Biloba", "Omega 3-6-9",
+            "Cúrcuma Premium", "Pimienta Negra", "Colágeno Marino", "Vitamina E", "Biotina",
+            "Aceite de Ricino", "Aceite de Coco", "Vinagre de Manzana", "Clorofila Plus", "Spirulina",
+            "Valeriana", "Pasiflora", "Castaño de Indias", "Alcachofa Gotas", "Hercampuri",
+            "Diente de León", "Boldo", "Jarabe de Guaco", "Sangre de Toro", "Jarabe para la Tos",
+            "Neurobión Natural", "Riñon Sano", "Próstata Relax", "Vigor Macho", "Fémina Control"
+        ];
+
+        const adjetivos = ["Forte", "Plus", "Extracto Puro", "Orgánico", "Concentrado", "Premium"];
+        const precios = ["95", "120", "150", "180", "220", "280", "75", "110"];
+        const imagenes = [
+            "https://images.unsplash.com/photo-1512036667332-28a1a9e170de?w=400",
+            "https://images.unsplash.com/photo-1584017945516-9a0003bc7e0a?w=400",
+            "https://images.unsplash.com/photo-1611930528657-8ae9dd280685?w=400",
+            "https://images.unsplash.com/photo-1594488687129-76a441e6872a?w=400",
+            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
+            "https://images.unsplash.com/photo-1607305387299-a3d961d64636?w=400"
+        ];
+
+        const grid = document.getElementById('main-grid');
+        const numWA = "521234567890"; // Reemplaza por tu número real
+
+        for (let i = 1; i <= 200; i++) {
+            const base = bases[i % bases.length];
+            const adj = adjetivos[i % adjetivos.length];
+            const nombre = `${base} ${adj}`;
+            const precio = precios[i % precios.length];
+            const img = imagenes[i % imagenes.length];
+
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${img}" alt="${nombre}">
+                <div class="product-info">
+                    <h3>${nombre}</h3>
+                    <p>Cuidado natural de alta potencia. Código: #NV-${1000 + i}</p>
+                    <div class="price">$${precio}.00</div>
+                </div>
+                <a href="https://wa.me/${numWA}?text=Hola, me interesa el producto: ${nombre}" target="_blank" class="btn-buy">
+                    <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                </a>
+            `;
+            grid.appendChild(card);
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2024 NaturaVida - Salud Natural a tu Alcance</p>
+    </footer>
+
+    <a href="https://wa.me/521234567890" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
