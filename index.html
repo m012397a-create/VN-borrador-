@@ -3,79 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JIGA LAB | Biotecnología Natural</title>
+    <title>JIGA LAB | Biotecnología Natural Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --blanco: #ffffff;
-            --negro: #1a1a1a;
-            --verde-salvia: #8a9a5b; /* Tono Salvia */
-            --verde-salvia-claro: #f1f3ee; 
+            --negro: #121212;
+            --verde-salvia: #8a9a5b; 
+            --verde-salvia-claro: #f4f6f2; 
+            --gris-suave: #f9f9f9;
             --gris-borde: #eeeeee;
+            --transicion: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--negro); scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; color: var(--negro); scroll-behavior: smooth; line-height: 1.6; overflow-x: hidden; }
 
-        /* --- HEADER --- */
+        /* --- NAVEGACIÓN --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 8%; background: var(--blanco);
+            padding: 12px 8%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gris-borde);
         }
-        .logo img { height: 50px; width: auto; }
+        .logo img { height: 45px; width: auto; }
         
-        nav { display: flex; align-items: center; gap: 20px; }
-        nav a { text-decoration: none; color: var(--negro); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        nav { display: flex; align-items: center; gap: 25px; }
+        nav a { text-decoration: none; color: var(--negro); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transicion); }
+        nav a:hover { color: var(--verde-salvia); }
 
-        /* DROPDOWN REDES */
-        .dropdown { position: relative; display: inline-block; }
-        .dropbtn { 
-            background: var(--verde-salvia); color: white; border: none; 
-            padding: 8px 15px; cursor: pointer; font-size: 0.7rem; 
-            text-transform: uppercase; font-weight: 700; letter-spacing: 1px;
-            border-radius: 2px;
+        .nav-socials { display: flex; gap: 15px; border-left: 1px solid #ddd; padding-left: 20px; margin-left: 10px; }
+        .nav-socials a { font-size: 1.1rem; color: var(--negro); transition: var(--transicion); }
+        .nav-socials a:hover { color: var(--verde-salvia); transform: translateY(-2px); }
+
+        /* --- SLIDER HERO --- */
+        .slider-container {
+            position: relative;
+            height: 50vh; 
+            width: 100%;
+            overflow: hidden;
+            background: var(--negro);
         }
-        .dropdown-content {
-            display: none; position: absolute; background: white;
-            right: 0; min-width: 150px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border: 1px solid var(--gris-borde);
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
         }
-        .dropdown-content a { color: var(--negro); padding: 12px; display: block; text-decoration: none; font-size: 0.8rem; border-bottom: 1px solid #f9f9f9; }
-        .dropdown-content a:hover { background: var(--verde-salvia-claro); color: var(--verde-salvia); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* --- SECCIONES --- */
-        .hero {
-            height: 400px;
-            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), 
-                        url('https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1500'); 
-            background-size: cover; background-position: center;
-            display: flex; align-items: center; justify-content: center; text-align: center;
+        .slide.active { opacity: 1; }
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
         }
-        .hero h1 { font-size: 3.5rem; letter-spacing: 10px; text-transform: uppercase; color: var(--negro); margin: 0; font-weight: 300; }
+        .slide-content { position: relative; z-index: 2; padding: 0 20px; }
+        .slide h1 { font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: 10px; text-transform: uppercase; font-weight: 300; margin-bottom: 5px; }
+        .slide p { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; }
 
-        .about { padding: 80px 8%; background: var(--verde-salvia-claro); text-align: center; }
-        .about h2 { text-transform: uppercase; letter-spacing: 4px; font-size: 1.8rem; color: var(--verde-salvia); margin-bottom: 20px; }
-        .about p { max-width: 800px; margin: 0 auto; line-height: 1.8; color: #555; font-size: 1.1rem; }
+        /* --- BENEFICIOS --- */
+        .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 30px 8%; background: var(--blanco); text-align: center; border-bottom: 1px solid var(--gris-borde); }
+        .benefit-item i { font-size: 1.4rem; color: var(--verde-salvia); margin-bottom: 8px; }
+        .benefit-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
-        .catalog { padding: 80px 8%; }
-        .catalog-title { text-align: center; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 5px; font-size: 1.6rem; }
+        /* --- CATÁLOGO --- */
+        .catalog { padding: 60px 8%; background: var(--blanco); }
+        .catalog-title { text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 8px; font-size: 1.5rem; font-weight: 300; }
+        .catalog-title::after { content: ''; display: block; width: 40px; height: 3px; background: var(--verde-salvia); margin: 12px auto; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-        .card { border: 1px solid var(--gris-borde); padding: 25px; text-align: center; transition: 0.3s; background: white; }
-        .card:hover { border-color: var(--verde-salvia); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
         
-        .card img { width: 100%; height: 280px; object-fit: contain; margin-bottom: 15px; }
-        .card h3 { font-size: 0.8rem; text-transform: uppercase; margin: 10px 0; height: 35px; display: flex; align-items: center; justify-content: center; letter-spacing: 1px; }
-        .price { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--verde-salvia); }
+        .card { 
+            background: white; border: 1px solid var(--gris-borde); padding: 20px; text-align: center; 
+            transition: var(--transicion); border-radius: 4px; display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--verde-salvia); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         
-        .btn-buy { background: var(--negro); color: white; text-decoration: none; padding: 14px; display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .card img { width: 100%; height: 240px; object-fit: contain; margin-bottom: 15px; }
+        .card h3 { font-size: 0.8rem; text-transform: uppercase; margin: 8px 0; letter-spacing: 1px; color: #333; min-height: 35px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        .price { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--verde-salvia); }
+        
+        .btn-buy { 
+            background: var(--negro); color: white; text-decoration: none; padding: 12px; 
+            display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; 
+            letter-spacing: 2px; transition: var(--transicion); margin-top: auto;
+        }
         .btn-buy:hover { background: var(--verde-salvia); }
 
-        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); text-decoration: none; }
+        .wa-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 2000; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3); text-decoration: none; transition: var(--transicion); }
 
-        footer { background: #111; padding: 40px 8%; text-align: center; font-size: 0.7rem; color: #666; letter-spacing: 1px; }
+        footer { background: #0a0a0a; padding: 50px 8% 25px; color: #666; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-col h4 { color: white; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin-bottom: 15px; }
+        .footer-col a { color: #666; text-decoration: none; display: block; margin-bottom: 8px; font-size: 0.8rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--verde-salvia); }
+        .footer-bottom { border-top: 1px solid #1a1a1a; padding-top: 20px; font-size: 0.6rem; letter-spacing: 2px; text-align: center; }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .slider-container { height: 40vh; }
+        }
     </style>
 </head>
 <body>
@@ -86,36 +125,80 @@
         </div>
         <nav>
             <a href="#inicio">Inicio</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#catalogo">Catálogo</a>
-            <div class="dropdown">
-                <button class="dropbtn">Redes <i class="fas fa-chevron-down"></i></button>
-                <div class="dropdown-content">
-                    <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-                    <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                </div>
+            <a href="#catalogo">Colección</a>
+            <div class="nav-socials">
+                <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@jigalab" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </nav>
     </header>
 
-    <section id="inicio" class="hero">
-        <h1>JIGA LAB</h1>
+    <section id="inicio" class="slider-container">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1500');">
+            <div class="slide-content">
+                <h1>JIGA LAB</h1>
+                <p>Biotecnología aplicada a la salud</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?q=80&w=1500');">
+            <div class="slide-content">
+                <h1>Pureza Total</h1>
+                <p>Grado Farmacéutico Premium</p>
+            </div>
+        </div>
     </section>
 
-    <section id="nosotros" class="about">
-        <h2>Biotecnología Natural</h2>
-        <p>En JIGA LAB, desarrollamos suplementos de alta gama utilizando biotecnología aplicada a ingredientes botánicos. Nuestra misión es potenciar tu bienestar con fórmulas puras, seguras y efectivas.</p>
+    <section class="benefits">
+        <div class="benefit-item"><i class="fas fa-leaf"></i><h4>Natural</h4></div>
+        <div class="benefit-item"><i class="fas fa-flask"></i><h4>Científico</h4></div>
+        <div class="benefit-item"><i class="fas fa-truck"></i><h4>Envíos MX</h4></div>
+        <div class="benefit-item"><i class="fas fa-check-circle"></i><h4>Calidad</h4></div>
     </section>
 
     <main id="catalogo" class="catalog">
-        <h2 class="catalog-title">// Formulación Premium</h2>
+        <h2 class="catalog-title">Colección Premium</h2>
         <div class="grid" id="main-grid"></div>
     </main>
 
+    <a href="https://wa.me/522722295010" class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>JIGA LAB</h4>
+                <p style="font-size: 0.75rem;">Suplementos de alta gama diseñados en México.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Síguenos</h4>
+                <a href="https://www.instagram.com/jigalab6" target="_blank">Instagram</a>
+                <a href="https://www.tiktok.com/@jigalab" target="_blank">TikTok</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <a href="tel:+522722295010">+52 272 229 5010</a>
+            </div>
+        </div>
+        <div class="footer-bottom">JIGA LAB &copy; 2026 | ORIZABA, VERACRUZ</div>
+    </footer>
+
     <script>
-        // NOMBRES EXACTOS SEGÚN TU LISTADO DE GITHUB
+        // SLIDER
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        // PRODUCTOS CORREGIDOS
         const productos = [
+            { n: "Calcio, Zinc y Magnesio", p: 350, img: "CALCIODEMAGNESIO.png" },
+            { n: "TestoVit", p: 520, img: "TESTO_M.png" }, // Título corregido a TestoVit
             { n: "Ajo Negro", p: 280, img: "AJO_NEGRO.png" },
             { n: "Citrato de Magnesio", p: 350, img: "CITRATO.png" },
             { n: "Citrato de Potasio", p: 350, img: "CITRATO_DEPOTASIO.png" },
@@ -125,7 +208,6 @@
             { n: "Guanábana & Moringa", p: 380, img: "GUANABANA_RENDER.png" },
             { n: "IsoFem Natural", p: 420, img: "ISOFEM.png" },
             { n: "Silimariano", p: 360, img: "SILIMARIANO.png" },
-            { n: "Testo M Premium", p: 520, img: "TESTO_M.png" },
             { n: "Vinagre de Manzana", p: 250, img: "VINAGRE.png" },
             { n: "VitaFem", p: 390, img: "VITAFEM.png" },
             { n: "VitaMen", p: 390, img: "VITAMEN.png" },
@@ -137,22 +219,13 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${p.img}" alt="${p.n}">
+                <img src="${p.img}" alt="${p.n}" onerror="this.src='https://via.placeholder.com/260x260?text=Cargando...'">
                 <h3>${p.n}</h3>
                 <div class="price">$${p.p}.00</div>
-                <a href="https://wa.me/522722295010?text=Hola JIGA LAB, me interesa: ${p.n}" target="_blank" class="btn-buy">Consultar</a>
+                <a href="https://wa.me/522722295010?text=Hola JIGA LAB, me interesa: ${p.n}" target="_blank" class="btn-buy">Comprar Ahora</a>
             `;
             grid.appendChild(card);
         });
     </script>
-
-    <a href="https://wa.me/522722295010" class="wa-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <footer>
-        <p>JIGA LAB &copy; 2026 | CIENCIA Y NATURALEZA | ORIZABA, VERACRUZ</p>
-    </footer>
-
 </body>
 </html>
