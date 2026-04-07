@@ -10,15 +10,13 @@
         :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f9faf7; }
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); scroll-behavior: smooth; }
         
-        /* Header con Redes Sociales y Carrito */
+        /* Header */
         header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03); }
         .logo img { height: 40px; }
-        
         nav { display: flex; align-items: center; }
         nav a { text-decoration: none; color: var(--negro); margin-left: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; position: relative; transition: 0.3s; }
         nav a:hover { color: var(--verde); }
 
-        /* Contenedor de iconos: Redes + Carrito */
         .header-icons { display: flex; align-items: center; margin-left: 20px; border-left: 1px solid #eee; padding-left: 20px; }
         .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); transition: 0.3s; }
         .header-icons a:hover { color: var(--verde); transform: translateY(-2px); }
@@ -35,7 +33,7 @@
         .hero-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
         .hero-content p { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
 
-        /* Grid de Productos */
+        /* Grid Productos */
         .section-title { text-align: center; padding: 60px 0 30px; }
         .section-title h2 { font-weight: 300; font-size: 1.8rem; letter-spacing: 8px; text-transform: uppercase; }
 
@@ -56,7 +54,13 @@
         .btn-comprar { background: var(--negro); color: #fff; padding: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border: none; width: 100%; transition: 0.3s; }
         .product-card:hover .btn-comprar { background: var(--verde); }
 
-        @media (max-width: 768px) { .header-icons { display: none; } } /* Ocultar redes en móvil para espacio */
+        /* Footer / COFEPRIS */
+        footer { background: #fff; padding: 60px 8% 40px; border-top: 1px solid #eee; text-align: center; }
+        .footer-logo img { height: 30px; filter: grayscale(1); opacity: 0.6; margin-bottom: 20px; }
+        .legal-notice { max-width: 800px; margin: 0 auto; font-size: 10px; color: #999; line-height: 1.6; letter-spacing: 0.5px; text-transform: uppercase; }
+        .copyright { margin-top: 30px; font-size: 11px; color: #bbb; letter-spacing: 1px; }
+
+        @media (max-width: 768px) { .header-icons { display: none; } }
     </style>
 </head>
 <body>
@@ -66,15 +70,11 @@
     <nav>
         <a href="index.html">Inicio</a>
         <a href="#coleccion">Colección</a>
-        
         <div class="header-icons">
-            <!-- Iconos de Redes Sociales -->
-            <a href="https://www.instagram.com/jigalab6" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/522722295010" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.tiktok.com/@tu_usuario" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            
-            <!-- Icono del Carrito -->
-            <a href="carrito.html" class="cart-link" title="Mi Carrito">
+            <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@tu_usuario" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="carrito.html" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cart-count">0</span>
             </a>
@@ -93,25 +93,38 @@
 </section>
 
 <div class="section-title" id="coleccion"><h2>Selección Exclusiva</h2></div>
+
 <div class="product-grid" id="grid"></div>
+
+<footer>
+    <div class="footer-logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
+    <div class="legal-notice">
+        "ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."
+        <br><br>
+        AVISO DE COFEPRIS: LOS SUPLEMENTOS ALIMENTICIOS ESTÁN DESTINADOS A COMPLEMENTAR LA DIETA Y NO DEBEN UTILIZARSE COMO SUSTITUTOS DE UNA DIETA EQUILIBRADA Y UN ESTILO DE VIDA SALUDABLE.
+    </div>
+    <div class="copyright">
+        &copy; 2026 JIGA LAB. TODOS LOS DERECHOS RESERVADOS.
+    </div>
+</footer>
 
 <script>
     const productos = [
-        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Nuestra fórmula avanzada está diseñada para fortalecer la densidad ósea y mejorar la recuperación muscular. Ideal para mantener un sistema estructural sólido y una función nerviosa equilibrada." },
-        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Potenciador natural que utiliza biotecnología botánica para optimizar los niveles de energía y vitalidad masculina. Mejora el rendimiento físico de forma segura." },
-        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Antioxidante superior que ayuda a regular la presión arterial y fortalece el sistema inmunológico de manera natural gracias a su proceso de fermentación." },
-        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Magnesio de alta absorción. Ayuda a reducir el estrés, mejorar la calidad del sueño y prevenir calambres musculares." },
-        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para la función renal y el equilibrio electrolítico. Ayuda a mantener una función muscular óptima." },
-        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Nutre piel, cabello y uñas. Refuerza los tejidos conectivos y articulaciones devolviendo firmeza y elasticidad." },
-        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Extracto concentrado con alta biodisponibilidad. Potente antiinflamatorio natural y protector digestivo." },
-        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento herbal valorado por su apoyo al equilibrio hormonal y la mejora del metabolismo de la glucosa." },
-        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Combinación de superalimentos rica en fitonutrientes que elevan las defensas naturales y protegen las células." },
-        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Bienestar femenino especializado. Ayuda a mitigar los síntomas del ciclo menstrual mediante fitoestrógenos naturales." },
-        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Protector hepático premium. El mejor aliado para la desintoxicación y regeneración del hígado." },
-        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar en la digestión y control de peso, presentado en cápsulas fáciles de digerir para evitar la acidez." },
-        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral diseñado específicamente para las necesidades biológicas y energía de la mujer." },
-        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre. Refuerza el sistema cardiovascular y la vitalidad física." },
-        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Esencial para la síntesis de colágeno y el fortalecimiento de las barreras inmunológicas diarias." }
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Nuestra fórmula avanzada de Calcio, Zinc y Magnesio está diseñada para fortalecer la densidad ósea y mejorar la recuperación muscular tras el ejercicio. Ideal para mantener un sistema estructural sólido y una función nerviosa equilibrada." },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "TestoVit es un potenciador natural que utiliza biotecnología botánica para optimizar los niveles de energía y vitalidad masculina. Mejora el rendimiento físico y mental de forma segura y natural." },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "El Ajo Negro fermentado es un superalimento con 10 veces más antioxidantes que el ajo común. Ayuda a regular la presión arterial y fortalece el sistema inmunológico de manera excepcional." },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Citrato de Magnesio de alta absorción. Esencial para más de 300 funciones metabólicas, ayuda a reducir el estrés, mejorar la calidad del sueño y prevenir calambres musculares." },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Mineral clave para la salud renal y el equilibrio de líquidos. Ayuda a mantener una función muscular óptima y previene la formación de cálculos, mejorando la hidratación celular." },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Complejo hidrolizado que nutre la piel, el cabello y las uñas desde el interior. Refuerza los tejidos conectivos y las articulaciones, devolviendo la elasticidad y firmeza perdida." },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Extracto concentrado con alta biodisponibilidad. Actúa como un potente antiinflamatorio natural y protector digestivo, ideal para el bienestar diario." },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento herbal tradicionalmente valorado por su apoyo al equilibrio hormonal y su capacidad para mejorar la digestión y el metabolismo de la glucosa." },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Una combinación única de dos potencias naturales. Rica en nutrientes y fitonutrientes que elevan las defensas naturales y protegen contra el daño oxidativo celular." },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Formulado para el equilibrio hormonal femenino. Ayuda a mitigar los síntomas del ciclo menstrual y la menopausia mediante fitoestrógenos naturales de alta pureza." },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Extracto de cardo mariano premium. El mejor aliado para la desintoxicación y regeneración del hígado, optimizando el procesamiento de toxinas en el cuerpo." },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Cápsulas de vinagre de manzana fermentado. Facilita la digestión, ayuda en el control del peso y regula los niveles de azúcar en sangre sin el sabor ácido del líquido." },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral diseñado para las necesidades biológicas de la mujer. Proporciona energía, equilibrio mineral y protección antioxidante diaria." },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre moderno. Refuerza el sistema cardiovascular, la energía física y la salud de la próstata." },
+        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Vitamina C pura reforzada. Esencial para la síntesis de colágeno y el fortalecimiento de las barreras inmunológicas contra enfermedades estacionales." }
     ];
 
     const grid = document.getElementById('grid');
@@ -125,15 +138,12 @@
         grid.appendChild(card);
     });
 
-    // Actualizar el número del carrito al cargar
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const total = cart.reduce((acc, item) => acc + item.qty, 0);
-        document.getElementById('cart-count').innerText = total;
+        document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.qty, 0);
     }
     updateCartCount();
 
-    // Lógica del Slider
     let current = 0;
     const slides = document.querySelectorAll('.slide');
     setInterval(() => {
