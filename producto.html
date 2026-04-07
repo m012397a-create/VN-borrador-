@@ -5,129 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Envío | JIGA LAB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f4f6f2; --gris: #f9f9f9; }
+        :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f4f6f2; }
         body { font-family: 'Inter', sans-serif; margin: 0; color: var(--negro); background: #fff; }
         
-        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
+        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
         .back { text-decoration: none; color: #121212; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
 
         .main-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 8%; max-width: 1400px; margin: 0 auto; }
         
-        /* Columna Izquierda: Visualización y Descripción */
-        .prod-display { height: fit-content; }
-        .img-card { background: var(--fondo); padding: 30px; border-radius: 4px; text-align: center; margin-bottom: 25px; }
-        .img-card img { max-width: 100%; height: 350px; object-fit: contain; }
+        /* Lado Izquierdo: Visual */
+        .prod-display { text-align: center; }
+        .img-container { background: var(--fondo); padding: 40px; border-radius: 4px; margin-bottom: 20px; }
+        .img-container img { max-width: 100%; height: 300px; object-fit: contain; }
         
-        .description-box { padding: 10px; border-top: 1px solid #eee; margin-top: 20px; }
-        .description-box h2 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); margin-bottom: 15px; }
-        .description-box p { font-size: 13px; line-height: 1.7; color: #555; font-weight: 300; }
-        .specs { margin-top: 15px; font-size: 12px; color: #777; list-style: none; padding: 0; }
-        .specs li { margin-bottom: 8px; display: flex; align-items: center; }
-        .specs li i { color: var(--verde); margin-right: 10px; font-size: 10px; }
+        .info-text { text-align: left; padding: 0 10px; }
+        .info-text h1 { font-weight: 200; font-size: 2rem; letter-spacing: 3px; text-transform: uppercase; margin: 10px 0; }
+        .price { font-size: 24px; color: var(--verde); margin-bottom: 20px; }
+        .desc-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #888; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .description { font-size: 14px; line-height: 1.6; color: #555; font-weight: 300; }
 
-        /* Columna Derecha: Formulario */
-        .checkout-form { background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 2px; position: sticky; top: 100px; height: fit-content; }
+        /* Lado Derecho: Formulario */
+        .checkout-form { border: 1px solid #eee; padding: 30px; border-radius: 2px; }
         .step-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: flex; align-items: center; color: var(--verde); }
         .step-title span { background: var(--verde); color: white; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-size: 10px; }
 
         .input-group { margin-bottom: 15px; }
         label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; color: #888; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: 'Inter'; font-size: 13px; outline: none; border-radius: 2px; }
-        input:focus { border-color: var(--verde); }
-
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: 'Inter'; font-size: 13px; box-sizing: border-box; }
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
-        .btn-wa { 
-            background: var(--negro); color: white; text-decoration: none; padding: 20px; 
-            display: block; text-align: center; font-size: 10px; font-weight: 600; 
-            letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; cursor: pointer; border: none; width: 100%;
+        .btn-enviar { 
+            background: var(--negro); color: white; padding: 20px; width: 100%; border: none;
+            font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
         }
-        .btn-wa:hover { background: var(--verde); }
+        .btn-enviar:hover { background: var(--verde); }
 
-        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; padding: 20px; } .checkout-form { position: static; } }
+        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; padding: 20px; } }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="back"><i class="fas fa-chevron-left"></i> Volver a la colección</a>
+    <a href="index.html" class="back"><i class="fas fa-chevron-left"></i> Volver</a>
     <img src="LOGO_JIGA_LAB.png" alt="Logo" style="height: 30px;">
 </header>
 
 <div class="main-container">
-    <!-- IZQUIERDA: PRODUCTO Y DESCRIPCIÓN -->
-    <div class="prod-display" id="visual-part">
-        <!-- Se llena con JS -->
+    <!-- SECCIÓN IZQUIERDA -->
+    <div class="prod-display" id="detalle-producto">
+        <!-- Se carga con JS -->
     </div>
 
-    <!-- DERECHA: FORMULARIO -->
+    <!-- SECCIÓN DERECHA -->
     <div class="checkout-form">
-        <div class="step-title"><span>1</span> Datos del Destinatario</div>
+        <div class="step-title"><span>1</span> Información del Destinatario</div>
         <div class="input-group">
             <label>Nombre Completo</label>
-            <input type="text" id="nombre" placeholder="Quién recibe">
+            <input type="text" id="nombre" placeholder="Quién recibe el paquete">
         </div>
         <div class="input-group">
-            <label>Teléfono Celular</label>
+            <label>Teléfono de Contacto</label>
             <input type="tel" id="tel" placeholder="10 dígitos">
         </div>
 
-        <div class="step-title" style="margin-top:30px;"><span>2</span> Dirección de Entrega</div>
+        <div class="step-title" style="margin-top:40px;"><span>2</span> Detalles de Entrega</div>
         <div class="input-group">
             <label>Calle y Avenida</label>
             <input type="text" id="calle" placeholder="Nombre de la calle">
         </div>
         <div class="row">
             <div class="input-group">
-                <label>Num. Exterior</label>
+                <label>Número Exterior</label>
                 <input type="text" id="num_ext" placeholder="Ej. 123">
             </div>
             <div class="input-group">
-                <label>Num. Interior</label>
+                <label>Número Interior</label>
                 <input type="text" id="num_int" placeholder="Opcional">
             </div>
         </div>
         <div class="row">
             <div class="input-group">
-                <label>C.P.</label>
-                <input type="text" id="cp_envio" maxlength="5">
+                <label>Código Postal</label>
+                <input type="text" id="cp_envio">
             </div>
             <div class="input-group">
                 <label>Colonia</label>
-                <input type="text" id="colonia" placeholder="Nombre de colonia">
+                <input type="text" id="colonia" placeholder="Nombre de la colonia">
             </div>
         </div>
         <div class="input-group">
-            <label>Referencia de ubicación</label>
-            <textarea id="ref" rows="2" placeholder="Color de fachada, entre qué calles, etc."></textarea>
+            <label>Referencias (Opcional)</label>
+            <textarea id="ref" rows="2" placeholder="Color de casa, entre qué calles..."></textarea>
         </div>
 
-        <button onclick="enviarPedido()" class="btn-wa">
-            <i class="fab fa-whatsapp"></i> Confirmar Pedido
-        </button>
+        <button onclick="enviarPedido()" class="btn-enviar">Confirmar y Enviar Datos</button>
     </div>
 </div>
 
 <script>
-    // BASE DE DATOS COMPLETA CON DESCRIPCIONES SEGURAS
+    // Base de datos con las descripciones reales
     const db = {
-        "CALCIODEMAGNESIO.png": { n: "Calcio, Zinc y Magnesio", p: 350, d: "Complejo mineral esencial diseñado para el soporte del sistema óseo y muscular. La combinación de magnesio y zinc contribuye al equilibrio electrolítico y al fortalecimiento de las defensas naturales." },
-        "TESTO_M.png": { n: "TestoVit", p: 520, d: "Fórmula vigorizante natural a base de extractos botánicos. Diseñada para apoyar el rendimiento físico, la vitalidad y el equilibrio energético diario del hombre." },
-        "AJO_NEGRO.png": { n: "Ajo Negro", p: 280, d: "Extracto concentrado de ajo madurado. Rico en antioxidantes que contribuyen a la salud del sistema circulatorio y cardiovascular sin el olor característico del ajo fresco." },
-        "CITRATO.png": { n: "Citrato de Magnesio", p: 350, d: "Formulación de alta absorción que auxilia en la relajación del sistema nervioso y muscular. Ideal para personas con alta actividad física o estrés constante." },
-        "CITRATO_DEPOTASIO.png": { n: "Citrato de Potasio", p: 350, d: "Suplemento mineral que ayuda a mantener el equilibrio de líquidos y apoya la función muscular normal y el sistema nervioso." },
-        "COLAGEN_COMPLEX.png": { n: "Colagen Complex", p: 480, d: "Mezcla avanzada que favorece la elasticidad de la piel, la salud capilar y el bienestar de las articulaciones mediante nutrición interna." },
-        "CURCUMA.png": { n: "Extracto de Cúrcuma", p: 290, d: "Extracto natural con alta concentración de curcuminoides, conocidos por sus propiedades antioxidantes que apoyan el bienestar general." },
-        "FENOGRECO_RENDER (1).png": { n: "Extracto de Fenogreco", p: 310, d: "Semilla tradicionalmente utilizada para el soporte digestivo y metabólico de forma natural." },
-        "GUANABANA_RENDER.png": { n: "Guanábana & Moringa", p: 380, d: "Sinergia botánica rica en fitonutrientes que ayuda a reforzar la vitalidad del organismo y el sistema inmunológico." },
-        "ISOFEM.png": { n: "IsoFem Natural", p: 420, d: "Fórmula suave diseñada para el bienestar del organismo femenino, utilizando ingredientes de origen botánico." },
-        "SILIMARIANO.png": { n: "Silimariano", p: 360, d: "Extracto de Cardo Mariano que contribuye al buen funcionamiento y protección del sistema hepático de manera natural." },
-        "VINAGRE.png": { n: "Vinagre de Manzana", p: 250, d: "Presentación en cápsulas que facilita el consumo de los beneficios del vinagre de manzana para el metabolismo digestivo." },
-        "VITAFEM.png": { n: "VitaFem", p: 390, d: "Multivitamínico integral formulado específicamente para cubrir las demandas nutricionales diarias de la mujer." },
-        "VITAMEN.png": { n: "VitaMen", p: 390, d: "Soporte vitamínico completo para el hombre moderno, enfocado en mantener la energía y el rendimiento óptimo." },
-        "VITC.png": { n: "Vitamina C", p: 240, d: "Poderoso antioxidante que protege las células contra el daño oxidativo y refuerza las defensas naturales del cuerpo." }
+        "TESTO_M.png": { 
+            n: "TestoVit", 
+            p: 520, 
+            d: "Fórmula vigorizante natural diseñada para aumentar la energía y vitalidad masculina. Contiene extractos botánicos de alta pureza que apoyan el rendimiento físico y el bienestar diario." 
+        },
+        "CALCIODEMAGNESIO.png": { 
+            n: "Calcio y Magnesio", 
+            p: 350, 
+            d: "Suplemento esencial para el fortalecimiento óseo y muscular. Ayuda a mantener un sistema nervioso equilibrado y mejora la calidad del descanso." 
+        },
+        "AJO_NEGRO.png": { 
+            n: "Ajo Negro", 
+            p: 280, 
+            d: "Poderoso antioxidante natural. Mejora la circulación sanguínea y fortalece el sistema inmunológico sin dejar rastro de olor o sabor fuerte." 
+        },
+        "CITRATO.png": { n: "Citrato de Magnesio", p: 350, d: "Ideal para la relajación muscular y combatir el estrés." },
+        "CITRATO_DEPOTASIO.png": { n: "Citrato de Potasio", p: 350, d: "Apoyo vital para la función renal y el equilibrio de líquidos." },
+        "COLAGEN_COMPLEX.png": { n: "Colagen Complex", p: 480, d: "Nutrición avanzada para piel, cabello y articulaciones." },
+        "CURCUMA.png": { n: "Extracto de Cúrcuma", p: 290, d: "Antiinflamatorio natural y antioxidante de alta potencia." },
+        "FENOGRECO_RENDER (1).png": { n: "Fenogreco", p: 310, d: "Apoyo natural para el metabolismo y el sistema digestivo." },
+        "GUANABANA_RENDER.png": { n: "Guanábana & Moringa", p: 380, d: "Súper combinación para reforzar las defensas naturales." },
+        "ISOFEM.png": { n: "IsoFem Natural", p: 420, d: "Equilibrio y bienestar natural para la mujer." },
+        "SILIMARIANO.png": { n: "Silimariano", p: 360, d: "Protección y desintoxicación natural para el hígado." },
+        "VINAGRE.png": { n: "Vinagre de Manzana", p: 250, d: "Auxiliar en el control de peso y la digestión saludable." },
+        "VITAFEM.png": { n: "VitaFem", p: 390, d: "Multivitamínico completo formulado para la mujer." },
+        "VITAMEN.png": { n: "VitaMen", p: 390, d: "Energía y multivitaminas esenciales para el hombre." },
+        "VITC.png": { n: "Vitamina C", p: 240, d: "Refuerzo inmunológico y protección antioxidante diaria." }
     };
 
     const params = new URLSearchParams(window.location.search);
@@ -136,22 +143,16 @@
     const producto = db[imgId];
 
     if (producto) {
-        document.getElementById('visual-part').innerHTML = `
-            <div class="img-card">
+        document.getElementById('detalle-producto').innerHTML = `
+            <div class="img-container">
                 <img src="${imgId}" alt="${producto.n}">
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h1 style="font-weight:200; font-size:1.8rem; letter-spacing:2px; text-transform:uppercase;">${producto.n}</h1>
+            <div class="info-text">
+                <h1>${producto.n}</h1>
                 <div class="price">$${producto.p}.00</div>
-            </div>
-            <div class="description-box">
-                <h2>Descripción y Beneficios</h2>
-                <p>${producto.d}</p>
-                <ul class="specs">
-                    <li><i class="fas fa-check"></i> Origen 100% Natural</li>
-                    <li><i class="fas fa-check"></i> Calidad de Exportación</li>
-                    <li><i class="fas fa-check"></i> Sin conservadores artificiales</li>
-                </ul>
+                <div class="desc-title">Descripción del Suplemento</div>
+                <p class="description">${producto.d}</p>
+                <p style="font-size:9px; color:#aaa; margin-top:20px; letter-spacing:1px;">JIGA LAB | CALIDAD DE EXPORTACIÓN</p>
             </div>
         `;
         document.getElementById('cp_envio').value = cpPrevia;
