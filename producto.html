@@ -3,89 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Producto | JIGA LAB</title>
+    <title>Detalles de Envío | JIGA LAB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --verde-salvia: #8a9a5b; --negro: #121212; --gris-claro: #f4f6f2; }
-        body { font-family: 'Inter', sans-serif; color: var(--negro); margin: 0; background: white; }
+        :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f4f6f2; --gris: #f9f9f9; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--negro); background: #fff; }
         
-        header { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
-        .btn-back { text-decoration: none; color: var(--negro); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
+        .back { text-decoration: none; color: #121212; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
 
-        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 60px 8%; align-items: center; }
+        .main-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 8%; max-width: 1400px; margin: 0 auto; }
         
-        .product-image { background: var(--gris-claro); padding: 40px; border-radius: 4px; text-align: center; }
-        .product-image img { max-width: 100%; height: 450px; object-fit: contain; }
+        /* Columna Izquierda: Visualización */
+        .prod-display { background: var(--fondo); padding: 30px; border-radius: 4px; text-align: center; height: fit-content; }
+        .prod-display img { max-width: 100%; height: 350px; object-fit: contain; }
+        .prod-display h1 { font-weight: 200; font-size: 1.8rem; letter-spacing: 2px; text-transform: uppercase; margin: 20px 0 10px; }
+        .price { font-size: 24px; color: var(--verde); font-weight: 300; }
 
-        .product-info h1 { font-weight: 200; font-size: 2.5rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
-        .price { font-size: 28px; color: var(--verde-salvia); font-weight: 300; margin-bottom: 30px; }
-        
-        .description { font-size: 14px; line-height: 1.8; color: #555; margin-bottom: 30px; border-top: 1px solid #eee; padding-top: 20px; }
-        
-        .delivery-info { background: #fdfdfd; border: 1px dashed #ddd; padding: 20px; font-size: 12px; margin-bottom: 30px; }
-        .delivery-info i { color: var(--verde-salvia); margin-right: 10px; }
+        /* Columna Derecha: Formulario por Pasos */
+        .checkout-form { background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 2px; }
+        .step-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: flex; align-items: center; color: var(--verde); }
+        .step-title span { background: var(--verde); color: white; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-size: 10px; }
 
-        .btn-whatsapp { 
-            background: var(--negro); color: white; text-decoration: none; padding: 18px 40px; 
-            display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; color: #888; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: 'Inter'; font-size: 13px; outline: none; border-radius: 2px; transition: 0.3s; }
+        input:focus { border-color: var(--verde); }
+
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        .btn-wa { 
+            background: var(--negro); color: white; text-decoration: none; padding: 20px; 
+            display: block; text-align: center; font-size: 10px; font-weight: 600; 
+            letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; transition: 0.3s;
+            cursor: pointer; border: none; width: 100%;
         }
-        .btn-whatsapp:hover { background: var(--verde-salvia); }
+        .btn-wa:hover { background: var(--verde); }
 
-        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; padding: 20px; } }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver a la colección</a>
+    <a href="index.html" class="back"><i class="fas fa-chevron-left"></i> Volver</a>
     <img src="LOGO_JIGA_LAB.png" alt="Logo" style="height: 30px;">
 </header>
 
-<div class="container" id="product-details">
-    <!-- El contenido se genera con JavaScript -->
+<div class="main-container" id="product-page">
+    <div class="prod-display" id="visual-part">
+        </div>
+
+    <div class="checkout-form">
+        <div class="step-title"><span>1</span> Información del Destinatario</div>
+        <div class="input-group">
+            <label>Nombre Completo</label>
+            <input type="text" id="nombre" placeholder="Quién recibe el paquete">
+        </div>
+        <div class="input-group">
+            <label>Teléfono de Contacto</label>
+            <input type="tel" id="tel" placeholder="10 dígitos">
+        </div>
+
+        <div class="step-title" style="margin-top:40px;"><span>2</span> Detalles de Entrega</div>
+        <div class="input-group">
+            <label>Calle y Avenida</label>
+            <input type="text" id="calle" placeholder="Nombre de la calle">
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label>Número Exterior</label>
+                <input type="text" id="num_ext" placeholder="Ej. 123">
+            </div>
+            <div class="input-group">
+                <label>Número Interior (Opcional)</label>
+                <input type="text" id="num_int" placeholder="Ej. Depto 4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label>Código Postal</label>
+                <input type="text" id="cp_envio" maxlength="5">
+            </div>
+            <div class="input-group">
+                <label>Colonia</label>
+                <input type="text" id="colonia" placeholder="Nombre de la colonia">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Referencias (Opcional)</label>
+            <textarea id="ref" rows="2" placeholder="Color de casa, entre qué calles, etc."></textarea>
+        </div>
+
+        <button onclick="enviarPedido()" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> Confirmar y Enviar Datos
+        </button>
+    </div>
 </div>
 
 <script>
-    // Base de datos expandida con descripciones
-    const productos = {
-        "AJO_NEGRO.png": { n: "Ajo Negro", p: 280, d: "Extracto concentrado de ajo negro madurado. Apoya la salud cardiovascular y el sistema inmunológico sin el sabor fuerte del ajo común." },
-        "CALCIODEMAGNESIO.png": { n: "Calcio, Zinc y Magnesio", p: 350, d: "Combinación mineral esencial para el fortalecimiento óseo y la recuperación muscular. Ideal para mantener un metabolismo saludable." },
-        "TESTO_M.png": { n: "TestoVit", p: 520, d: "Fórmula vigorizante natural diseñada para el apoyo hormonal masculino y la energía diaria mediante extractos botánicos selectos." },
-        "CITRATO.png": { n: "Citrato de Magnesio", p: 350, d: "Magnesio de alta absorción que contribuye al funcionamiento normal del sistema nervioso y reduce el cansancio y la fatiga." },
-        "VITC.png": { n: "Vitamina C", p: 240, d: "Poderoso antioxidante que refuerza las defensas naturales del cuerpo y promueve la síntesis de colágeno en la piel." }
-        // Agrega aquí el resto siguiendo el mismo formato de la imagen...
+    // Mismo diccionario de productos para mantener consistencia
+    const db = {
+        "CALCIODEMAGNESIO.png": { n: "Calcio, Zinc y Magnesio", p: 350 },
+        "TESTO_M.png": { n: "TestoVit", p: 520 },
+        "AJO_NEGRO.png": { n: "Ajo Negro", p: 280 },
+        "CITRATO.png": { n: "Citrato de Magnesio", p: 350 },
+        "CITRATO_DEPOTASIO.png": { n: "Citrato de Potasio", p: 350 },
+        "COLAGEN_COMPLEX.png": { n: "Colagen Complex", p: 480 },
+        "CURCUMA.png": { n: "Extracto de Cúrcuma", p: 290 },
+        "FENOGRECO_RENDER (1).png": { n: "Extracto de Fenogreco", p: 310 },
+        "GUANABANA_RENDER.png": { n: "Guanábana & Moringa", p: 380 },
+        "ISOFEM.png": { n: "IsoFem Natural", p: 420 },
+        "SILIMARIANO.png": { n: "Silimariano", p: 360 },
+        "VINAGRE.png": { n: "Vinagre de Manzana", p: 250 },
+        "VITAFEM.png": { n: "VitaFem", p: 390 },
+        "VITAMEN.png": { n: "VitaMen", p: 390 },
+        "VITC.png": { n: "Vitamina C", p: 240 }
     };
 
-    // Obtener el nombre de la imagen de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const imgKey = urlParams.get('img');
-    const item = productos[imgKey];
+    const params = new URLSearchParams(window.location.search);
+    const imgId = params.get('img');
+    const cpPrevia = params.get('cp') || "";
+    const producto = db[imgId];
 
-    const detailContainer = document.getElementById('product-details');
-
-    if (item) {
-        detailContainer.innerHTML = `
-            <div class="product-image">
-                <img src="${imgKey}" alt="${item.n}">
-            </div>
-            <div class="product-info">
-                <h1>${item.n}</h1>
-                <div class="price">$${item.p}.00</div>
-                <div class="description">
-                    <p>${item.d}</p>
-                    <p><strong>Uso sugerido:</strong> Tomar una cápsula diaria con alimentos. No exceder la dosis recomendada.</p>
-                </div>
-                <div class="delivery-info">
-                    <p><i class="fas fa-truck"></i> <strong>Información de entrega:</strong></p>
-                    <p>• Entrega local sin costo en Orizaba, Veracruz.</p>
-                    <p>• Envíos a todo México por estafeta/FedEx (2-4 días hábiles).</p>
-                </div>
-                <a href="https://wa.me/522722295010?text=Hola, me interesa comprar ${item.n}" class="btn-whatsapp">Pedir por WhatsApp</a>
-            </div>
+    // Cargar imagen y nombre del producto seleccionado
+    if (producto) {
+        document.getElementById('visual-part').innerHTML = `
+            <img src="${imgId}" alt="${producto.n}">
+            <h1>${producto.n}</h1>
+            <div class="price">$${producto.p}.00</div>
+            <p style="font-size:10px; margin-top:20px; color:#999; letter-spacing:1px;">SELECCIÓN JIGA LAB PREMIUM</p>
         `;
-    } else {
-        detailContainer.innerHTML = "<h1>Producto no encontrado</h1>";
+        document.getElementById('cp_envio').value = cpPrevia;
+    }
+
+    function enviarPedido() {
+        // Recolectar datos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const tel = document.getElementById('tel').value;
+        const calle = document.getElementById('calle').value;
+        const n_ext = document.getElementById('num_ext').value;
+        const n_int = document.getElementById('num_int').value;
+        const cp = document.getElementById('cp_envio').value;
+        const col = document.getElementById('colonia').value;
+        const ref = document.getElementById('ref').value;
+
+        if(!nombre || !calle || !cp || !col) {
+            alert("Por favor rellena los campos principales para el envío.");
+            return;
+        }
+
+        // Construir el mensaje de WhatsApp
+        let mensaje = `*NUEVO PEDIDO JIGA LAB*%0A`;
+        mensaje += `--------------------------%0A`;
+        mensaje += `*Producto:* ${producto.n}%0A`;
+        mensaje += `*Precio:* $${producto.p}.00%0A%0A`;
+        mensaje += `*DATOS DE ENVÍO*%0A`;
+        mensaje += `*Destinatario:* ${nombre}%0A`;
+        mensaje += `*Teléfono:* ${tel}%0A`;
+        mensaje += `*Dirección:* ${calle} #${n_ext}${n_int ? ', Int. ' + n_int : ''}%0A`;
+        mensaje += `*Colonia:* ${col}%0A`;
+        mensaje += `*C.P.:* ${cp}%0A`;
+        if(ref) mensaje += `*Referencia:* ${ref}%0A`;
+        mensaje += `--------------------------%0A`;
+        mensaje += `_Enviado desde el portal JIGA LAB_`;
+
+        // Abrir WhatsApp con el número que ya tienes
+        window.open(`https://wa.me/522722295010?text=${mensaje}`, '_blank');
     }
 </script>
 </body>
