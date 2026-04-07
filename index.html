@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JIGA LAB | Biotecnología Natural</title>
+    <title>JIGA LAB | Selección Botánica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -11,14 +11,14 @@
             --blanco: #ffffff;
             --negro: #121212;
             --verde-salvia: #8a9a5b;
-            --verde-fondo: #f4f6f2; /* El tono tenue que pediste */
+            --verde-fondo: #f4f6f2;
             --gris-borde: #eeeeee;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; color: var(--negro); background-color: var(--blanco); overflow-x: hidden; }
 
-        /* --- TOP BAR (CP) --- */
+        /* --- BARRA SUPERIOR (CP) --- */
         .top-bar {
             background: #f8f9fa; height: 35px; display: flex; align-items: center; 
             justify-content: center; font-size: 10px; color: #666; border-bottom: 1px solid var(--gris-borde);
@@ -42,8 +42,8 @@
         .nav-socials a { color: var(--negro); font-size: 14px; transition: 0.3s; }
         .nav-socials a:hover { color: var(--verde-salvia); }
 
-        /* --- SLIDER (IMÁGENES SEGURAS) --- */
-        .slider-container { position: relative; height: 55vh; background: #000; overflow: hidden; }
+        /* --- SLIDER SEGURO --- */
+        .slider-container { position: relative; height: 50vh; background: #000; overflow: hidden; }
         .slide { 
             position: absolute; width: 100%; height: 100%; opacity: 0; 
             transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center; 
@@ -54,16 +54,7 @@
         .slide-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 18px; text-transform: uppercase; margin-bottom: 10px; }
         .slide-content p { font-weight: 300; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; opacity: 0.9; }
 
-        /* --- ICONOS BENEFICIOS --- */
-        .benefits { 
-            display: flex; justify-content: space-around; padding: 40px 10%; 
-            background: white; border-bottom: 1px solid var(--gris-borde);
-        }
-        .benefit-item { text-align: center; }
-        .benefit-item i { color: var(--verde-salvia); font-size: 16px; margin-bottom: 10px; display: block; }
-        .benefit-item span { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* --- CATÁLOGO (FONDO VERDE TENUE) --- */
+        /* --- CATÁLOGO --- */
         .catalog { padding: 80px 8%; background-color: var(--verde-fondo); }
         .catalog-title { 
             text-align: center; margin-bottom: 60px; font-weight: 300; 
@@ -74,7 +65,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 40px; }
         .card { 
             background: white; border: 1px solid #eee; padding: 35px 20px; text-align: center; 
-            transition: 0.4s; border-radius: 2px; display: flex; flex-direction: column;
+            transition: 0.4s; border-radius: 2px; display: flex; flex-direction: column; text-decoration: none; color: inherit;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.03); border-color: var(--verde-salvia); }
         .card img { width: 100%; height: 240px; object-fit: contain; margin-bottom: 25px; }
@@ -86,15 +77,10 @@
             font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
             transition: 0.3s; margin-top: auto;
         }
-        .btn-buy:hover { background: var(--verde-salvia); }
+        .card:hover .btn-buy { background: var(--verde-salvia); }
 
-        /* --- WHATSAPP --- */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 2000; text-decoration: none; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-
-        /* --- FOOTER LEGAL --- */
         footer { background: white; padding: 60px 8%; text-align: center; border-top: 1px solid #eee; }
         .legal { font-size: 9px; color: #999; letter-spacing: 1px; line-height: 1.8; max-width: 700px; margin: 0 auto; }
-        .legal strong { color: #555; }
     </style>
 </head>
 <body>
@@ -111,45 +97,21 @@
             <a href="#">Inicio</a>
             <a href="#catalogo">Colección</a>
             <div class="nav-socials">
-                <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
             </div>
         </nav>
     </header>
 
     <section class="slider-container">
-        <!-- Slide 1 -->
         <div class="slide active">
             <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1600" alt="Germinados">
-            <div class="slide-content">
-                <h1>JIGA LAB</h1>
-                <p>BIOTECNOLOGÍA DE ORIGEN NATURAL</p>
-            </div>
+            <div class="slide-content"><h1>JIGA LAB</h1><p>BIOTECNOLOGÍA NATURAL</p></div>
         </div>
-        <!-- Slide 2 -->
         <div class="slide">
             <img src="https://images.unsplash.com/photo-1581093510983-ca47d3c52a92?q=80&w=1600" alt="Laboratorio">
-            <div class="slide-content">
-                <h1>ALTA PUREZA</h1>
-                <p>EXTRACTOS CONCENTRADOS PREMIUM</p>
-            </div>
+            <div class="slide-content"><h1>ALTA PUREZA</h1><p>EXTRACTOS CONCENTRADOS PREMIUM</p></div>
         </div>
-        <!-- Slide 3 -->
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1599933333333-64a6f7b1e4e2?q=80&w=1600" alt="Plantas">
-            <div class="slide-content">
-                <h1>BIENESTAR</h1>
-                <p>SOLUCIONES DE ORIGEN ORGÁNICO</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="benefits">
-        <div class="benefit-item"><i class="fas fa-leaf"></i><span>Natural</span></div>
-        <div class="benefit-item"><i class="fas fa-flask"></i><span>Científico</span></div>
-        <div class="benefit-item"><i class="fas fa-truck"></i><span>Envíos MX</span></div>
-        <div class="benefit-item"><i class="fas fa-check-circle"></i><span>Calidad</span></div>
     </section>
 
     <main class="catalog" id="catalogo">
@@ -157,30 +119,24 @@
         <div class="grid" id="main-grid"></div>
     </main>
 
-    <a href="https://wa.me/522722295010" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
     <footer>
         <div class="legal">
-            <strong>AVISO DE RESPONSABILIDAD:</strong><br>
-            ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA.
-            ESTE SITIO WEB PROMUEVE ÚNICAMENTE SUPLEMENTOS ALIMENTICIOS PARA EL BIENESTAR GENERAL.
-            <br><br>
+            <strong>AVISO DE RESPONSABILIDAD:</strong> ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA.<br>
             JIGA LAB | ORIZABA, VERACRUZ | © 2026
         </div>
     </footer>
 
     <script>
-        // --- LÓGICA DEL SLIDER ---
+        // ROTACIÓN DE SLIDER
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        function rotateSlides() {
+        setInterval(() => {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }
-        setInterval(rotateSlides, 5000);
+        }, 5000);
 
-        // --- PRODUCTOS (NOMBRES DE ARCHIVOS SEGÚN TU CARPETA) ---
+        // LISTA DE PRODUCTOS
         const productos = [
             { n: "Calcio, Zinc y Magnesio", p: 350, img: "CALCIODEMAGNESIO.png" },
             { n: "TestoVit", p: 520, img: "TESTO_M.png" },
@@ -204,28 +160,21 @@
 
         function render() {
             grid.innerHTML = '';
-            const cp = cpInput.value || 'no indicado';
-            
+            const cp = cpInput.value || '00000';
             productos.forEach(p => {
-                // Mensaje de WhatsApp dinámico con CP y nombre de producto
-                const msj = encodeURIComponent(`Hola JIGA LAB 👋 me interesa el producto: *${p.n}*. Mi C.P. es: *${cp}*. ¿Tienen disponibilidad?`);
-                
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${p.img}" alt="${p.n}" onerror="this.src='https://via.placeholder.com/240x240?text=JIGA+LAB'">
-                    <h3>${p.n}</h3>
-                    <div class="price">$${p.p}.00</div>
-                    <a href="https://wa.me/522722295010?text=${msj}" target="_blank" class="btn-buy">Comprar Ahora</a>
+                // AQUÍ ESTÁ EL CAMBIO: Ahora el link lleva a producto.html pasando la imagen y el CP
+                grid.innerHTML += `
+                    <a href="producto.html?img=${p.img}&cp=${cp}" class="card">
+                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/240x240?text=JIGA+LAB'">
+                        <h3>${p.n}</h3>
+                        <div class="price">$${p.p}.00</div>
+                        <div class="btn-buy">Ver Detalles</div>
+                    </a>
                 `;
-                grid.appendChild(card);
             });
         }
 
-        // Escucha cambios en el input de CP para actualizar los botones en tiempo real
         cpInput.addEventListener('input', render);
-        
-        // Carga inicial
         render();
     </script>
 </body>
