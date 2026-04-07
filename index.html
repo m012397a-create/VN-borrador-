@@ -7,175 +7,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --blanco: #ffffff;
-            --negro: #121212;
-            --verde-salvia: #8a9a5b;
-            --verde-fondo: #f4f6f2;
-            --gris-borde: #eeeeee;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; color: var(--negro); background-color: var(--blanco); overflow-x: hidden; }
-
-        /* --- BARRA SUPERIOR (CP) --- */
-        .top-bar {
-            background: #f8f9fa; height: 35px; display: flex; align-items: center; 
-            justify-content: center; font-size: 10px; color: #666; border-bottom: 1px solid var(--gris-borde);
-            letter-spacing: 1px; text-transform: uppercase;
-        }
-        .top-bar input {
-            border: none; background: none; border-bottom: 1px solid var(--verde-salvia);
-            width: 50px; font-size: 10px; text-align: center; margin: 0 10px; outline: none; font-weight: 600;
-        }
-
-        /* --- HEADER --- */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; background: rgba(255,255,255,0.95);
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03);
-        }
-        .logo img { height: 38px; }
-        nav { display: flex; gap: 30px; align-items: center; }
-        nav a { text-decoration: none; color: var(--negro); font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
-        .nav-socials { display: flex; gap: 15px; align-items: center; margin-left: 20px; }
-        .nav-socials a { color: var(--negro); font-size: 14px; transition: 0.3s; }
-        .nav-socials a:hover { color: var(--verde-salvia); }
-
-        /* --- SLIDER SEGURO --- */
-        .slider-container { position: relative; height: 50vh; background: #000; overflow: hidden; }
-        .slide { 
-            position: absolute; width: 100%; height: 100%; opacity: 0; 
-            transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center; 
-        }
-        .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
-        .slide-content { position: absolute; text-align: center; color: white; z-index: 5; }
-        .slide-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 18px; text-transform: uppercase; margin-bottom: 10px; }
-        .slide-content p { font-weight: 300; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; opacity: 0.9; }
-
-        /* --- CATÁLOGO --- */
-        .catalog { padding: 80px 8%; background-color: var(--verde-fondo); }
-        .catalog-title { 
-            text-align: center; margin-bottom: 60px; font-weight: 300; 
-            letter-spacing: 12px; text-transform: uppercase; font-size: 1.6rem; 
-        }
-        .catalog-title::after { content: ''; display: block; width: 40px; height: 1px; background: var(--verde-salvia); margin: 15px auto; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 40px; }
-        .card { 
-            background: white; border: 1px solid #eee; padding: 35px 20px; text-align: center; 
-            transition: 0.4s; border-radius: 2px; display: flex; flex-direction: column; text-decoration: none; color: inherit;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.03); border-color: var(--verde-salvia); }
-        .card img { width: 100%; height: 240px; object-fit: contain; margin-bottom: 25px; }
-        .card h3 { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px; color: #444; min-height: 35px; display: flex; align-items: center; justify-content: center; }
-        .price { font-size: 22px; font-weight: 300; color: var(--verde-salvia); margin-bottom: 25px; }
+        :root { --verde: #8a9a5b; --negro: #121212; --gris-claro: #f4f6f2; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: #fff; color: var(--negro); overflow-x: hidden; }
         
-        .btn-buy { 
-            background: var(--negro); color: white; text-decoration: none; padding: 14px; 
-            font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
-            transition: 0.3s; margin-top: auto;
-        }
-        .card:hover .btn-buy { background: var(--verde-salvia); }
+        /* Top Bar */
+        .top-bar { background: var(--gris-claro); padding: 8px 8%; display: flex; justify-content: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #e0e0e0; }
+        .top-bar span { margin: 0 15px; color: #666; }
 
-        footer { background: white; padding: 60px 8%; text-align: center; border-top: 1px solid #eee; }
-        .legal { font-size: 9px; color: #999; letter-spacing: 1px; line-height: 1.8; max-width: 700px; margin: 0 auto; }
+        /* Header */
+        header { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: #fff; z-index: 1000; }
+        .logo img { height: 45px; }
+        nav a { text-decoration: none; color: var(--negro); margin-left: 30px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+        .social-icons i { margin-left: 15px; font-size: 14px; cursor: pointer; }
+
+        /* Hero Slider */
+        .hero { position: relative; height: 80vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; display: flex; align-items: center; justify-content: center; }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .hero-content { position: absolute; text-align: center; color: #fff; z-index: 10; }
+        .hero-content h1 { font-weight: 200; font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
+        .hero-content p { font-weight: 300; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
+
+        /* Grid de Productos */
+        .section-title { text-align: center; padding: 80px 0 40px; }
+        .section-title h2 { font-weight: 200; font-size: 1.8rem; letter-spacing: 8px; text-transform: uppercase; position: relative; display: inline-block; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: var(--verde); }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 0 8% 80px; }
+        .product-card { text-align: center; transition: 0.4s; cursor: pointer; text-decoration: none; color: inherit; }
+        .product-card:hover { transform: translateY(-5px); }
+        .img-wrapper { background: var(--gris-claro); padding: 40px; margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
+        .product-card img { width: 100%; height: 250px; object-fit: contain; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.05); }
+        .product-card h3 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; margin: 15px 0 5px; }
+        .product-card .price { font-size: 14px; color: var(--verde); font-weight: 300; }
+        .product-card .tag { font-size: 8px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; display: block; }
+
+        @media (max-width: 768px) { .hero-content h1 { font-size: 2rem; letter-spacing: 8px; } .product-grid { grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 4%; } }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <i class="fas fa-map-marker-alt"></i> Enviar a: 
-        <input type="text" id="cp-input" placeholder="00000" maxlength="5"> 
-        | Envío sin costo en Orizaba, Veracruz
+<div class="top-bar">
+    <span><i class="fas fa-map-marker-alt"></i> ENVIAR A: <input type="text" id="cp-input" placeholder="00000" style="background:transparent; border:none; width:45px; font-size:9px; outline:none; color:var(--verde); font-weight:bold;"></span>
+    <span>ENVÍO SIN COSTO EN ORIZABA, VERACRUZ</span>
+</div>
+
+<header>
+    <div class="logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#coleccion">Colección</a>
+    </nav>
+    <div class="social-icons">
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-whatsapp"></i>
     </div>
+</header>
 
-    <header>
-        <div class="logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#catalogo">Colección</a>
-            <div class="nav-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+<section class="hero">
+    <!-- REVISA QUE ESTOS NOMBRES SEAN IGUALES A TUS ARCHIVOS -->
+    <div class="slide active"><img src="CITRATO.png" alt="Slider 1"></div>
+    <div class="slide"><img src="TESTO_M.png" alt="Slider 2"></div>
+    <div class="slide"><img src="VITAMEN.png" alt="Slider 3"></div>
+    <div class="hero-content">
+        <h1>ALTA PUREZA</h1>
+        <p>Extractos concentrados premium</p>
+    </div>
+</section>
+
+<div class="section-title" id="coleccion">
+    <h2>Selección Exclusiva</h2>
+</div>
+
+<div class="product-grid" id="grid">
+    <!-- Se genera automáticamente -->
+</div>
+
+<script>
+    const productos = [
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350 },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520 },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280 },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350 },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350 },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480 },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290 },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310 },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380 },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420 },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360 },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250 },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390 },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390 },
+        { img: "VITC.png", n: "Vitamina C", p: 240 }
+    ];
+
+    const grid = document.getElementById('grid');
+    const cpInput = document.getElementById('cp-input');
+
+    productos.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <div class="img-wrapper">
+                <img src="${p.img}" alt="${p.n}">
             </div>
-        </nav>
-    </header>
+            <h3>${p.n}</h3>
+            <div class="price">$${p.p}.00</div>
+            <span class="tag">Selección JIGA LAB Premium</span>
+        `;
+        card.onclick = () => {
+            const cp = cpInput.value || "00000";
+            window.location.href = `producto.html?img=${p.img}&cp=${cp}`;
+        };
+        grid.appendChild(card);
+    });
 
-    <section class="slider-container">
-        <div class="slide active">
-            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1600" alt="Germinados">
-            <div class="slide-content"><h1>JIGA LAB</h1><p>BIOTECNOLOGÍA NATURAL</p></div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1581093510983-ca47d3c52a92?q=80&w=1600" alt="Laboratorio">
-            <div class="slide-content"><h1>ALTA PUREZA</h1><p>EXTRACTOS CONCENTRADOS PREMIUM</p></div>
-        </div>
-    </section>
+    // Lógica del Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 4000);
+</script>
 
-    <main class="catalog" id="catalogo">
-        <h2 class="catalog-title">Selección Exclusiva</h2>
-        <div class="grid" id="main-grid"></div>
-    </main>
-
-    <footer>
-        <div class="legal">
-            <strong>AVISO DE RESPONSABILIDAD:</strong> ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA.<br>
-            JIGA LAB | ORIZABA, VERACRUZ | © 2026
-        </div>
-    </footer>
-
-    <script>
-        // ROTACIÓN DE SLIDER
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 5000);
-
-        // LISTA DE PRODUCTOS
-        const productos = [
-            { n: "Calcio, Zinc y Magnesio", p: 350, img: "CALCIODEMAGNESIO.png" },
-            { n: "TestoVit", p: 520, img: "TESTO_M.png" },
-            { n: "Ajo Negro", p: 280, img: "AJO_NEGRO.png" },
-            { n: "Citrato de Magnesio", p: 350, img: "CITRATO.png" },
-            { n: "Citrato de Potasio", p: 350, img: "CITRATO_DEPOTASIO.png" },
-            { n: "Colagen Complex", p: 480, img: "COLAGEN_COMPLEX.png" },
-            { n: "Extracto de Cúrcuma", p: 290, img: "CURCUMA.png" },
-            { n: "Extracto de Fenogreco", p: 310, img: "FENOGRECO_RENDER (1).png" },
-            { n: "Guanábana & Moringa", p: 380, img: "GUANABANA_RENDER.png" },
-            { n: "IsoFem Natural", p: 420, img: "ISOFEM.png" },
-            { n: "Silimariano", p: 360, img: "SILIMARIANO.png" },
-            { n: "Vinagre de Manzana", p: 250, img: "VINAGRE.png" },
-            { n: "VitaFem", p: 390, img: "VITAFEM.png" },
-            { n: "VitaMen", p: 390, img: "VITAMEN.png" },
-            { n: "Vitamina C", p: 240, img: "VITC.png" }
-        ];
-
-        const grid = document.getElementById('main-grid');
-        const cpInput = document.getElementById('cp-input');
-
-        function render() {
-            grid.innerHTML = '';
-            const cp = cpInput.value || '00000';
-            productos.forEach(p => {
-                // AQUÍ ESTÁ EL CAMBIO: Ahora el link lleva a producto.html pasando la imagen y el CP
-                grid.innerHTML += `
-                    <a href="producto.html?img=${p.img}&cp=${cp}" class="card">
-                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/240x240?text=JIGA+LAB'">
-                        <h3>${p.n}</h3>
-                        <div class="price">$${p.p}.00</div>
-                        <div class="btn-buy">Ver Detalles</div>
-                    </a>
-                `;
-            });
-        }
-
-        cpInput.addEventListener('input', render);
-        render();
-    </script>
 </body>
 </html>
