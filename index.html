@@ -8,21 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f9faf7; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); scroll-behavior: smooth; }
+        * { cursor: none !important; } /* Oculta el cursor real */
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); scroll-behavior: smooth; overflow-x: hidden; }
         
+        /* Cursor Personalizado */
+        #cursor-dot { width: 8px; height: 8px; background: var(--verde); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
+        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--verde); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: transform 0.15s ease-out; }
+
         /* Header */
-        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .logo img { height: 40px; }
         nav { display: flex; align-items: center; }
-        nav a { text-decoration: none; color: var(--negro); margin-left: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; position: relative; transition: 0.3s; }
-        nav a:hover { color: var(--verde); }
-
-        .header-icons { display: flex; align-items: center; margin-left: 20px; border-left: 1px solid #eee; padding-left: 20px; }
-        .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); transition: 0.3s; }
-        .header-icons a:hover { color: var(--verde); transform: translateY(-2px); }
+        nav a { text-decoration: none; color: var(--negro); margin-left: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         
+        .header-icons { display: flex; align-items: center; margin-left: 20px; border-left: 1px solid #eee; padding-left: 20px; }
+        .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); }
         .cart-link { position: relative; color: var(--verde) !important; }
-        #cart-count { position: absolute; top: -10px; right: -12px; background: var(--negro); color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 10px; font-weight: bold; }
+        #cart-count { position: absolute; top: -10px; right: -12px; background: var(--negro); color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 10px; }
 
         /* Slider */
         .hero { position: relative; height: 60vh; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -30,54 +32,40 @@
         .slide.active { opacity: 1; }
         .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
         .hero-content { position: relative; text-align: center; color: #fff; z-index: 10; }
-        .hero-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        .hero-content p { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
+        .hero-content h1 { font-weight: 200; font-size: 3rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
 
         /* Grid Productos */
-        .section-title { text-align: center; padding: 60px 0 30px; }
-        .section-title h2 { font-weight: 300; font-size: 1.8rem; letter-spacing: 8px; text-transform: uppercase; }
-
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 0 8% 80px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 8% 80px; }
         .product-card { 
-            background: #fff; padding: 30px; border: 1px solid transparent; 
-            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            cursor: pointer; text-align: center; 
-            display: flex; flex-direction: column; align-items: center;
-            position: relative; top: 0;
+            background: #fff; padding: 30px; border: 1px solid #eee; transition: 0.4s; 
+            text-align: center; position: relative; top: 0;
         }
-        .product-card:hover { border: 1px solid var(--verde); top: -10px; box-shadow: 0 15px 35px rgba(138, 154, 91, 0.1); }
+        .product-card:hover { border: 1px solid var(--verde); top: -10px; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
         .product-card img { width: 180px; height: 220px; object-fit: contain; margin-bottom: 20px; transition: 0.5s; }
-        .product-card:hover img { transform: scale(1.08); }
-        
-        .product-card h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #444; min-height: 40px; }
-        .product-card .price { font-size: 20px; color: var(--verde); font-weight: 300; margin-bottom: 20px; }
-        .btn-comprar { background: var(--negro); color: #fff; padding: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border: none; width: 100%; transition: 0.3s; }
-        .product-card:hover .btn-comprar { background: var(--verde); }
+        .product-card:hover img { transform: scale(1.1); }
+        .product-card h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; height: 40px; }
+        .price { font-size: 20px; color: var(--verde); margin-bottom: 20px; }
+        .btn-comprar { background: var(--negro); color: #fff; padding: 12px; font-size: 10px; width: 100%; border: none; letter-spacing: 2px; }
 
-        /* Footer / COFEPRIS */
-        footer { background: #fff; padding: 60px 8% 40px; border-top: 1px solid #eee; text-align: center; }
-        .footer-logo img { height: 30px; filter: grayscale(1); opacity: 0.6; margin-bottom: 20px; }
-        .legal-notice { max-width: 800px; margin: 0 auto; font-size: 10px; color: #999; line-height: 1.6; letter-spacing: 0.5px; text-transform: uppercase; }
-        .copyright { margin-top: 30px; font-size: 11px; color: #bbb; letter-spacing: 1px; }
-
-        @media (max-width: 768px) { .header-icons { display: none; } }
+        /* Footer */
+        footer { background: #fff; padding: 40px 8%; text-align: center; border-top: 1px solid #eee; }
+        .legal { font-size: 10px; color: #999; max-width: 700px; margin: 0 auto; letter-spacing: 1px; }
     </style>
 </head>
 <body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-outline"></div>
 
 <header>
     <div class="logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="#coleccion">Colección</a>
         <div class="header-icons">
             <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.tiktok.com/@tu_usuario" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="carrito.html" class="cart-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count">0</span>
-            </a>
+            <a href="https://www.tiktok.com/@jigalab" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="carrito.html" class="cart-link"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
         </div>
     </nav>
 </header>
@@ -85,73 +73,61 @@
 <section class="hero">
     <div class="slide active"><img src="https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
     <div class="slide"><img src="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
-    <div class="slide"><img src="https://images.pexels.com/photos/4505171/pexels-photo-4505171.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
-    <div class="hero-content">
-        <h1>JIGA LAB</h1>
-        <p>Biotecnología de origen natural</p>
-    </div>
+    <div class="hero-content"><h1>JIGA LAB</h1><p>BIOTECNOLOGÍA NATURAL</p></div>
 </section>
-
-<div class="section-title" id="coleccion"><h2>Selección Exclusiva</h2></div>
 
 <div class="product-grid" id="grid"></div>
 
 <footer>
-    <div class="footer-logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
-    <div class="legal-notice">
-        "ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."
-        <br><br>
-        AVISO DE COFEPRIS: LOS SUPLEMENTOS ALIMENTICIOS ESTÁN DESTINADOS A COMPLEMENTAR LA DIETA Y NO DEBEN UTILIZARSE COMO SUSTITUTOS DE UNA DIETA EQUILIBRADA Y UN ESTILO DE VIDA SALUDABLE.
-    </div>
-    <div class="copyright">
-        &copy; 2026 JIGA LAB. TODOS LOS DERECHOS RESERVADOS.
-    </div>
+    <p class="legal">"ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."<br>AVISO DE COFEPRIS 2026</p>
 </footer>
 
 <script>
     const productos = [
-        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Nuestra fórmula avanzada de Calcio, Zinc y Magnesio está diseñada para fortalecer la densidad ósea y mejorar la recuperación muscular tras el ejercicio. Ideal para mantener un sistema estructural sólido y una función nerviosa equilibrada." },
-        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "TestoVit es un potenciador natural que utiliza biotecnología botánica para optimizar los niveles de energía y vitalidad masculina. Mejora el rendimiento físico y mental de forma segura y natural." },
-        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "El Ajo Negro fermentado es un superalimento con 10 veces más antioxidantes que el ajo común. Ayuda a regular la presión arterial y fortalece el sistema inmunológico de manera excepcional." },
-        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Citrato de Magnesio de alta absorción. Esencial para más de 300 funciones metabólicas, ayuda a reducir el estrés, mejorar la calidad del sueño y prevenir calambres musculares." },
-        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Mineral clave para la salud renal y el equilibrio de líquidos. Ayuda a mantener una función muscular óptima y previene la formación de cálculos, mejorando la hidratación celular." },
-        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Complejo hidrolizado que nutre la piel, el cabello y las uñas desde el interior. Refuerza los tejidos conectivos y las articulaciones, devolviendo la elasticidad y firmeza perdida." },
-        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Extracto concentrado con alta biodisponibilidad. Actúa como un potente antiinflamatorio natural y protector digestivo, ideal para el bienestar diario." },
-        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento herbal tradicionalmente valorado por su apoyo al equilibrio hormonal y su capacidad para mejorar la digestión y el metabolismo de la glucosa." },
-        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Una combinación única de dos potencias naturales. Rica en nutrientes y fitonutrientes que elevan las defensas naturales y protegen contra el daño oxidativo celular." },
-        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Formulado para el equilibrio hormonal femenino. Ayuda a mitigar los síntomas del ciclo menstrual y la menopausia mediante fitoestrógenos naturales de alta pureza." },
-        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Extracto de cardo mariano premium. El mejor aliado para la desintoxicación y regeneración del hígado, optimizando el procesamiento de toxinas en el cuerpo." },
-        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Cápsulas de vinagre de manzana fermentado. Facilita la digestión, ayuda en el control del peso y regula los niveles de azúcar en sangre sin el sabor ácido del líquido." },
-        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral diseñado para las necesidades biológicas de la mujer. Proporciona energía, equilibrio mineral y protección antioxidante diaria." },
-        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre moderno. Refuerza el sistema cardiovascular, la energía física y la salud de la próstata." },
-        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Vitamina C pura reforzada. Esencial para la síntesis de colágeno y el fortalecimiento de las barreras inmunológicas contra enfermedades estacionales." }
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Fortalece huesos y mejora la recuperación muscular." },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Optimiza niveles de energía y vitalidad masculina." },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Antioxidante superior para presión y defensas." },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Reduce estrés y mejora el sueño." },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para función renal y electrolitos." },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Nutre piel, cabello, uñas y articulaciones." },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Potente antiinflamatorio natural concentrado." },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Apoyo hormonal y metabolismo de glucosa." },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Eleva defensas y protege las células." },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Equilibrio hormonal femenino natural." },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Protector y regenerador hepático premium." },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar en digestión y control de peso." },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral para la mujer." },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre." },
+        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Esencial para colágeno e inmunidad." }
     ];
 
     const grid = document.getElementById('grid');
     productos.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `<img src="${p.img}"><h3>${p.n}</h3><div class="price">$${p.p}.00</div><button class="btn-comprar">Ver Detalle</button>`;
-        card.onclick = () => {
-            window.location.href = `producto.html?img=${encodeURIComponent(p.img)}&nombre=${encodeURIComponent(p.n)}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
-        };
-        grid.appendChild(card);
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `<img src="${p.img}"><h3>${p.n}</h3><div class="price">$${p.p}</div><button class="btn-comprar">VER DETALLES</button>`;
+        div.onclick = () => window.location.href = `producto.html?img=${p.img}&nombre=${p.n}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
+        grid.appendChild(div);
     });
 
-    function updateCartCount() {
+    // Lógica del Cursor
+    const dot = document.getElementById("cursor-dot");
+    const out = document.getElementById("cursor-outline");
+    window.addEventListener("mousemove", e => {
+        dot.style.left = out.style.left = e.clientX + "px";
+        dot.style.top = out.style.top = e.clientY + "px";
+    });
+
+    // Contador Carrito
+    function up() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.qty, 0);
+        document.getElementById('cart-count').innerText = cart.reduce((a, b) => a + b.qty, 0);
     }
-    updateCartCount();
+    up();
 
-    let current = 0;
-    const slides = document.querySelectorAll('.slide');
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 4000);
+    // Slider
+    let c = 0; const s = document.querySelectorAll('.slide');
+    setInterval(() => { s[c].classList.remove('active'); c = (c+1)%s.length; s[c].classList.add('active'); }, 4000);
 </script>
-
 </body>
 </html>
