@@ -3,77 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JIGA LAB | Selección Botánica</title>
+    <title>JIGA LAB | Biotecnología Natural</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --verde: #8a9a5b; --negro: #121212; --gris-claro: #f4f6f2; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background-color: #fff; color: var(--negro); overflow-x: hidden; }
+        :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f9faf7; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); scroll-behavior: smooth; }
         
-        /* Top Bar */
-        .top-bar { background: var(--gris-claro); padding: 8px 8%; display: flex; justify-content: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #e0e0e0; }
-        .top-bar span { margin: 0 15px; color: #666; }
+        header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .logo img { height: 40px; }
+        nav a { text-decoration: none; color: var(--negro); margin-left: 25px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+        .social-icons a { color: var(--negro); margin-left: 15px; font-size: 14px; text-decoration: none; }
 
-        /* Header */
-        header { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: #fff; z-index: 1000; }
-        .logo img { height: 45px; }
-        nav a { text-decoration: none; color: var(--negro); margin-left: 30px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
-        .social-icons i { margin-left: 15px; font-size: 14px; cursor: pointer; }
-
-        /* Hero Slider */
-        .hero { position: relative; height: 80vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; display: flex; align-items: center; justify-content: center; }
+        .hero { position: relative; height: 65vh; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
         .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .hero-content { position: absolute; text-align: center; color: #fff; z-index: 10; }
-        .hero-content h1 { font-weight: 200; font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        .hero-content p { font-weight: 300; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+        
+        .hero-content { position: relative; text-align: center; color: #fff; z-index: 10; pointer-events: none; }
+        .hero-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
+        .hero-content p { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
 
-        /* Grid de Productos */
-        .section-title { text-align: center; padding: 80px 0 40px; }
-        .section-title h2 { font-weight: 200; font-size: 1.8rem; letter-spacing: 8px; text-transform: uppercase; position: relative; display: inline-block; }
-        .section-title h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: var(--verde); }
+        .section-title { text-align: center; padding: 70px 0 40px; }
+        .section-title h2 { font-weight: 300; font-size: 1.8rem; letter-spacing: 10px; text-transform: uppercase; }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 0 8% 80px; }
-        .product-card { text-align: center; transition: 0.4s; cursor: pointer; text-decoration: none; color: inherit; }
-        .product-card:hover { transform: translateY(-5px); }
-        .img-wrapper { background: var(--gris-claro); padding: 40px; margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
-        .product-card img { width: 100%; height: 250px; object-fit: contain; transition: 0.5s; }
-        .product-card:hover img { transform: scale(1.05); }
-        .product-card h3 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; margin: 15px 0 5px; }
-        .product-card .price { font-size: 14px; color: var(--verde); font-weight: 300; }
-        .product-card .tag { font-size: 8px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; display: block; }
-
-        @media (max-width: 768px) { .hero-content h1 { font-size: 2rem; letter-spacing: 8px; } .product-grid { grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 4%; } }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 0 8% 80px; }
+        
+        .product-card { 
+            background: #fff; padding: 30px; border: 1px solid transparent; 
+            transition: 0.4s; cursor: pointer; text-align: center; 
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .product-card:hover { border: 1px solid var(--verde); box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+        
+        .product-card img { width: 180px; height: 220px; object-fit: contain; margin-bottom: 20px; transition: 0.3s; }
+        .product-card h3 { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 15px 0 10px; color: #444; min-height: 30px; }
+        .product-card .price { font-size: 20px; color: var(--verde); font-weight: 300; margin-bottom: 20px; }
+        
+        .btn-comprar { 
+            background: #121212; color: #fff; padding: 12px 30px; 
+            font-size: 10px; letter-spacing: 2px; text-transform: uppercase; 
+            border: none; width: 100%; transition: 0.3s;
+        }
+        .product-card:hover .btn-comprar { background: var(--verde); }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <span><i class="fas fa-map-marker-alt"></i> ENVIAR A: <input type="text" id="cp-input" placeholder="00000" style="background:transparent; border:none; width:45px; font-size:9px; outline:none; color:var(--verde); font-weight:bold;"></span>
-    <span>ENVÍO SIN COSTO EN ORIZABA, VERACRUZ</span>
-</div>
-
 <header>
     <div class="logo"><img src="LOGO_JIGA_LAB.png" alt="JIGA LAB"></div>
     <nav>
-        <a href="#">Inicio</a>
+        <a href="index.html">Inicio</a>
         <a href="#coleccion">Colección</a>
+        <div class="social-icons" style="display: inline-block;">
+            <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </nav>
-    <div class="social-icons">
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-whatsapp"></i>
-    </div>
 </header>
 
 <section class="hero">
-    <!-- REVISA QUE ESTOS NOMBRES SEAN IGUALES A TUS ARCHIVOS -->
-    <div class="slide active"><img src="CITRATO.png" alt="Slider 1"></div>
-    <div class="slide"><img src="TESTO_M.png" alt="Slider 2"></div>
-    <div class="slide"><img src="VITAMEN.png" alt="Slider 3"></div>
+    <div class="slide active"><img src="https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
+    <div class="slide"><img src="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
+    <div class="slide"><img src="https://images.pexels.com/photos/4505171/pexels-photo-4505171.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
     <div class="hero-content">
-        <h1>ALTA PUREZA</h1>
-        <p>Extractos concentrados premium</p>
+        <h1>JIGA LAB</h1>
+        <p>Biotecnología de origen natural</p>
     </div>
 </section>
 
@@ -81,60 +76,54 @@
     <h2>Selección Exclusiva</h2>
 </div>
 
-<div class="product-grid" id="grid">
-    <!-- Se genera automáticamente -->
-</div>
+<div class="product-grid" id="grid"></div>
 
 <script>
+    // LISTA DE PRODUCTOS CON SUS DESCRIPCIONES
     const productos = [
-        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350 },
-        { img: "TESTO_M.png", n: "TestoVit", p: 520 },
-        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280 },
-        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350 },
-        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350 },
-        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480 },
-        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290 },
-        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310 },
-        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380 },
-        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420 },
-        { img: "SILIMARIANO.png", n: "Silimariano", p: 360 },
-        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250 },
-        { img: "VITAFEM.png", n: "VitaFem", p: 390 },
-        { img: "VITAMEN.png", n: "VitaMen", p: 390 },
-        { img: "VITC.png", n: "Vitamina C", p: 240 }
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Fórmula integral para fortalecer el sistema óseo y mejorar la función muscular." },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Potenciador natural diseñado para optimizar el rendimiento y la energía diaria." },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Poderoso antioxidante natural que apoya la salud cardiovascular y el sistema inmune." },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Alta absorción para reducir el estrés, mejorar el sueño y el equilibrio mineral." },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para la función renal y el equilibrio de líquidos en el cuerpo." },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Mejora la elasticidad de la piel y fortalece articulaciones, cabello y uñas." },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Propiedades antiinflamatorias naturales para el bienestar general y digestivo." },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento tradicional para el equilibrio hormonal y el apoyo digestivo." },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Súper combo de nutrientes y antioxidantes para elevar tus defensas." },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Bienestar femenino especializado en el equilibrio hormonal natural." },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Extracto premium para la protección y desintoxicación efectiva del hígado." },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar natural en la digestión y el control de niveles de glucosa." },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico completo diseñado para las necesidades de la mujer activa." },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Fórmula de vitaminas y minerales esenciales para el rendimiento masculino." },
+        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Refuerzo diario de antioxidantes para la salud respiratoria y cutánea." }
     ];
 
     const grid = document.getElementById('grid');
-    const cpInput = document.getElementById('cp-input');
 
     productos.forEach(p => {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
-            <div class="img-wrapper">
-                <img src="${p.img}" alt="${p.n}">
-            </div>
+            <img src="${p.img}" alt="${p.n}">
             <h3>${p.n}</h3>
             <div class="price">$${p.p}.00</div>
-            <span class="tag">Selección JIGA LAB Premium</span>
+            <button class="btn-comprar">Comprar Ahora</button>
         `;
         card.onclick = () => {
-            const cp = cpInput.value || "00000";
-            window.location.href = `producto.html?img=${p.img}&cp=${cp}`;
+            // Pasamos Nombre (n), Precio (p), Imagen (img) y Descripción (d)
+            const url = `producto.html?img=${encodeURIComponent(p.img)}&nombre=${encodeURIComponent(p.n)}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
+            window.location.href = url;
         };
         grid.appendChild(card);
     });
 
-    // Lógica del Slider
-    let currentSlide = 0;
+    let current = 0;
     const slides = document.querySelectorAll('.slide');
-    
-    function nextSlide() {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }
-    setInterval(nextSlide, 4000);
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 4000);
 </script>
 
 </body>
