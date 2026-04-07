@@ -10,42 +10,53 @@
         :root { --verde: #8a9a5b; --negro: #121212; --fondo: #f9faf7; }
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); scroll-behavior: smooth; }
         
+        /* Header con Redes Sociales y Carrito */
         header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03); }
         .logo img { height: 40px; }
-        nav a { text-decoration: none; color: var(--negro); margin-left: 25px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
-        .social-icons a { color: var(--negro); margin-left: 15px; font-size: 14px; text-decoration: none; }
+        
+        nav { display: flex; align-items: center; }
+        nav a { text-decoration: none; color: var(--negro); margin-left: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; position: relative; transition: 0.3s; }
+        nav a:hover { color: var(--verde); }
 
-        .hero { position: relative; height: 65vh; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        /* Contenedor de iconos: Redes + Carrito */
+        .header-icons { display: flex; align-items: center; margin-left: 20px; border-left: 1px solid #eee; padding-left: 20px; }
+        .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); transition: 0.3s; }
+        .header-icons a:hover { color: var(--verde); transform: translateY(-2px); }
+        
+        .cart-link { position: relative; color: var(--verde) !important; }
+        #cart-count { position: absolute; top: -10px; right: -12px; background: var(--negro); color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 10px; font-weight: bold; }
+
+        /* Slider */
+        .hero { position: relative; height: 60vh; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
         .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
-        
-        .hero-content { position: relative; text-align: center; color: #fff; z-index: 10; pointer-events: none; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; text-align: center; color: #fff; z-index: 10; }
         .hero-content h1 { font-weight: 200; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
         .hero-content p { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; opacity: 0.8; }
 
-        .section-title { text-align: center; padding: 70px 0 40px; }
-        .section-title h2 { font-weight: 300; font-size: 1.8rem; letter-spacing: 10px; text-transform: uppercase; }
+        /* Grid de Productos */
+        .section-title { text-align: center; padding: 60px 0 30px; }
+        .section-title h2 { font-weight: 300; font-size: 1.8rem; letter-spacing: 8px; text-transform: uppercase; }
 
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 0 8% 80px; }
-        
         .product-card { 
             background: #fff; padding: 30px; border: 1px solid transparent; 
-            transition: 0.4s; cursor: pointer; text-align: center; 
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            cursor: pointer; text-align: center; 
             display: flex; flex-direction: column; align-items: center;
+            position: relative; top: 0;
         }
-        .product-card:hover { border: 1px solid var(--verde); box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+        .product-card:hover { border: 1px solid var(--verde); top: -10px; box-shadow: 0 15px 35px rgba(138, 154, 91, 0.1); }
+        .product-card img { width: 180px; height: 220px; object-fit: contain; margin-bottom: 20px; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.08); }
         
-        .product-card img { width: 180px; height: 220px; object-fit: contain; margin-bottom: 20px; transition: 0.3s; }
-        .product-card h3 { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 15px 0 10px; color: #444; min-height: 30px; }
+        .product-card h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #444; min-height: 40px; }
         .product-card .price { font-size: 20px; color: var(--verde); font-weight: 300; margin-bottom: 20px; }
-        
-        .btn-comprar { 
-            background: #121212; color: #fff; padding: 12px 30px; 
-            font-size: 10px; letter-spacing: 2px; text-transform: uppercase; 
-            border: none; width: 100%; transition: 0.3s;
-        }
+        .btn-comprar { background: var(--negro); color: #fff; padding: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border: none; width: 100%; transition: 0.3s; }
         .product-card:hover .btn-comprar { background: var(--verde); }
+
+        @media (max-width: 768px) { .header-icons { display: none; } } /* Ocultar redes en móvil para espacio */
     </style>
 </head>
 <body>
@@ -55,9 +66,18 @@
     <nav>
         <a href="index.html">Inicio</a>
         <a href="#coleccion">Colección</a>
-        <div class="social-icons" style="display: inline-block;">
-            <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        
+        <div class="header-icons">
+            <!-- Iconos de Redes Sociales -->
+            <a href="https://www.instagram.com/jigalab6" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/522722295010" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@tu_usuario" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            
+            <!-- Icono del Carrito -->
+            <a href="carrito.html" class="cart-link" title="Mi Carrito">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </a>
         </div>
     </nav>
 </header>
@@ -72,51 +92,48 @@
     </div>
 </section>
 
-<div class="section-title" id="coleccion">
-    <h2>Selección Exclusiva</h2>
-</div>
-
+<div class="section-title" id="coleccion"><h2>Selección Exclusiva</h2></div>
 <div class="product-grid" id="grid"></div>
 
 <script>
-    // LISTA DE PRODUCTOS CON SUS DESCRIPCIONES
     const productos = [
-        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Fórmula integral para fortalecer el sistema óseo y mejorar la función muscular." },
-        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Potenciador natural diseñado para optimizar el rendimiento y la energía diaria." },
-        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Poderoso antioxidante natural que apoya la salud cardiovascular y el sistema inmune." },
-        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Alta absorción para reducir el estrés, mejorar el sueño y el equilibrio mineral." },
-        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para la función renal y el equilibrio de líquidos en el cuerpo." },
-        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Mejora la elasticidad de la piel y fortalece articulaciones, cabello y uñas." },
-        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Propiedades antiinflamatorias naturales para el bienestar general y digestivo." },
-        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento tradicional para el equilibrio hormonal y el apoyo digestivo." },
-        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Súper combo de nutrientes y antioxidantes para elevar tus defensas." },
-        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Bienestar femenino especializado en el equilibrio hormonal natural." },
-        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Extracto premium para la protección y desintoxicación efectiva del hígado." },
-        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar natural en la digestión y el control de niveles de glucosa." },
-        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico completo diseñado para las necesidades de la mujer activa." },
-        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Fórmula de vitaminas y minerales esenciales para el rendimiento masculino." },
-        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Refuerzo diario de antioxidantes para la salud respiratoria y cutánea." }
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Nuestra fórmula avanzada está diseñada para fortalecer la densidad ósea y mejorar la recuperación muscular. Ideal para mantener un sistema estructural sólido y una función nerviosa equilibrada." },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Potenciador natural que utiliza biotecnología botánica para optimizar los niveles de energía y vitalidad masculina. Mejora el rendimiento físico de forma segura." },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Antioxidante superior que ayuda a regular la presión arterial y fortalece el sistema inmunológico de manera natural gracias a su proceso de fermentación." },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Magnesio de alta absorción. Ayuda a reducir el estrés, mejorar la calidad del sueño y prevenir calambres musculares." },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para la función renal y el equilibrio electrolítico. Ayuda a mantener una función muscular óptima." },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Nutre piel, cabello y uñas. Refuerza los tejidos conectivos y articulaciones devolviendo firmeza y elasticidad." },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Extracto concentrado con alta biodisponibilidad. Potente antiinflamatorio natural y protector digestivo." },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Suplemento herbal valorado por su apoyo al equilibrio hormonal y la mejora del metabolismo de la glucosa." },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Combinación de superalimentos rica en fitonutrientes que elevan las defensas naturales y protegen las células." },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Bienestar femenino especializado. Ayuda a mitigar los síntomas del ciclo menstrual mediante fitoestrógenos naturales." },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Protector hepático premium. El mejor aliado para la desintoxicación y regeneración del hígado." },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar en la digestión y control de peso, presentado en cápsulas fáciles de digerir para evitar la acidez." },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral diseñado específicamente para las necesidades biológicas y energía de la mujer." },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre. Refuerza el sistema cardiovascular y la vitalidad física." },
+        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Esencial para la síntesis de colágeno y el fortalecimiento de las barreras inmunológicas diarias." }
     ];
 
     const grid = document.getElementById('grid');
-
     productos.forEach(p => {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.innerHTML = `
-            <img src="${p.img}" alt="${p.n}">
-            <h3>${p.n}</h3>
-            <div class="price">$${p.p}.00</div>
-            <button class="btn-comprar">Comprar Ahora</button>
-        `;
+        card.innerHTML = `<img src="${p.img}"><h3>${p.n}</h3><div class="price">$${p.p}.00</div><button class="btn-comprar">Ver Detalle</button>`;
         card.onclick = () => {
-            // Pasamos Nombre (n), Precio (p), Imagen (img) y Descripción (d)
-            const url = `producto.html?img=${encodeURIComponent(p.img)}&nombre=${encodeURIComponent(p.n)}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
-            window.location.href = url;
+            window.location.href = `producto.html?img=${encodeURIComponent(p.img)}&nombre=${encodeURIComponent(p.n)}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
         };
         grid.appendChild(card);
     });
 
+    // Actualizar el número del carrito al cargar
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = cart.reduce((acc, item) => acc + item.qty, 0);
+        document.getElementById('cart-count').innerText = total;
+    }
+    updateCartCount();
+
+    // Lógica del Slider
     let current = 0;
     const slides = document.querySelectorAll('.slide');
     setInterval(() => {
