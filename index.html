@@ -3,242 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NaturaVida | Tienda Naturista</title>
+    <title>JIGA LAB | Biotecnología Natural</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --verde-pro: #1b4332;
-            --verde-medio: #2d6a4f;
-            --verde-vida: #52b788;
             --blanco: #ffffff;
-            --gris: #f4f7f6;
+            --negro: #111111;
+            --verde-jiga: #76b947;
+            --verde-tenue: rgba(118, 185, 71, 0.05); /* El toque verde claro que pediste */
+            --gris-borde: #eeeeee;
         }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: var(--gris);
-            color: #333;
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--negro); scroll-behavior: smooth; }
 
         /* --- NAVEGACIÓN --- */
         header {
-            background: var(--blanco);
-            padding: 1rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 8%; background: var(--blanco);
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gris-borde);
         }
-
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--verde-pro); }
-        nav a { text-decoration: none; color: var(--verde-pro); margin-left: 20px; font-weight: 600; transition: 0.3s; }
-        nav a:hover { color: var(--verde-vida); }
-
-        /* --- BANNER PRINCIPAL (LA IMAGEN DEL ÁRBOL) --- */
-        .hero {
-            height: 350px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
-
-        /* --- SECCIÓN NOSOTROS (OBJETIVOS) --- */
-        .about-section {
-            padding: 4rem 8%;
-            background: var(--blanco);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .about-item i { font-size: 2.5rem; color: var(--verde-vida); margin-bottom: 15px; }
-        .about-item h3 { color: var(--verde-pro); margin-bottom: 10px; }
-        .about-item p { color: #666; font-size: 0.95rem; line-height: 1.6; }
-
-        /* --- CATÁLOGO --- */
-        .catalog-container { padding: 4rem 8%; }
-        .section-title { text-align: center; font-size: 2.2rem; color: var(--verde-pro); margin-bottom: 3rem; }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
-
-        .product-info { padding: 20px; text-align: center; flex-grow: 1; }
-        .product-info h3 { margin: 10px 0; color: var(--verde-pro); font-size: 1.1rem; min-height: 2.5rem; }
-        .product-info p { color: #777; font-size: 0.85rem; margin-bottom: 15px; }
+        .logo img { height: 60px; width: auto; }
         
-        .price { font-size: 1.3rem; color: var(--verde-medio); font-weight: 800; margin-bottom: 15px; }
+        nav { display: flex; align-items: center; gap: 25px; }
+        nav a { text-decoration: none; color: var(--negro); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        nav a:hover { color: var(--verde-jiga); }
 
-        .btn-buy {
-            background: #25d366;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            margin: 0 20px 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-weight: bold;
-            transition: 0.3s;
+        /* --- DROPDOWN REDES --- */
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn { 
+            background: var(--negro); color: white; border: none; 
+            padding: 10px 20px; cursor: pointer; font-size: 0.75rem; 
+            text-transform: uppercase; font-weight: 700; letter-spacing: 1px;
         }
-        .btn-buy:hover { background: #128c7e; }
-
-        /* --- BOTÓN FLOTANTE --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 2px 5px 15px rgba(0,0,0,0.2);
-            z-index: 2000;
+        .dropdown-content {
+            display: none; position: absolute; background: white;
+            right: 0; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid var(--gris-borde);
         }
+        .dropdown-content a {
+            color: var(--negro); padding: 12px; display: block; margin: 0;
+            text-transform: none; border-bottom: 1px solid #f9f9f9; font-weight: 400;
+        }
+        .dropdown-content a:hover { background: var(--verde-tenue); color: var(--verde-jiga); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        footer { background: var(--verde-pro); color: white; padding: 2.5rem; text-align: center; }
+        /* --- SECCIÓN 1: INICIO (BANNER ANTERIOR) --- */
+        .hero {
+            height: 450px;
+            background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), 
+                        url('https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1500'); 
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; letter-spacing: 6px; text-transform: uppercase; margin: 0; }
+
+        /* --- SECCIÓN 2: NOSOTROS (VERDE TENUE) --- */
+        .about { padding: 80px 8%; background: var(--verde-tenue); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .about-text h2 { text-transform: uppercase; letter-spacing: 3px; font-size: 1.8rem; }
+        .about-text p { line-height: 1.8; color: #555; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-box { background: white; padding: 25px; text-align: center; border: 1px solid var(--gris-borde); }
+        .stat-box i { font-size: 1.8rem; color: var(--verde-jiga); margin-bottom: 10px; }
+
+        /* --- SECCIÓN 3: CATÁLOGO --- */
+        .catalog { padding: 80px 8%; }
+        .catalog-title { text-align: center; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 4px; font-size: 1.5rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .card { border: 1px solid var(--gris-borde); padding: 25px; text-align: center; transition: 0.3s; background: white; }
+        .card:hover { border-color: var(--verde-jiga); transform: translateY(-5px); }
+        
+        /* Ajuste de imagen según tus archivos .PNG */
+        .card img { width: 100%; height: 320px; object-fit: contain; margin-bottom: 15px; }
+        .card h3 { font-size: 0.9rem; text-transform: uppercase; margin: 15px 0; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .price { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; }
+        
+        .btn-buy { background: var(--negro); color: white; text-decoration: none; padding: 14px; display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-buy:hover { background: var(--verde-jiga); }
+
+        /* BOTÓN WHATSAPP */
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); text-decoration: none; }
+
+        footer { background: #f9f9f9; padding: 50px 8%; text-align: center; border-top: 1px solid var(--gris-borde); font-size: 0.75rem; color: #888; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">🌿 NaturaVida</div>
+        <div class="logo">
+            <!-- Nombre exacto de tu logo en la carpeta -->
+            <img src="LOGO_JIGA_LAB.PNG" alt="JIGA LAB">
+        </div>
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#catalogo">Catálogo</a>
+            <div class="dropdown">
+                <button class="dropbtn">Redes <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <section class="hero" id="inicio">
-        <h1>Tu Salud, Nuestra Pasión</h1>
-        <p>Suplementos 100% naturales para una vida plena.</p>
+    <section id="inicio" class="hero">
+        <h1>JIGA LAB</h1>
     </section>
 
-    <!-- Sección Objetivos (Nosotros) -->
-    <section class="about-section" id="nosotros">
-        <div class="about-item">
-            <i class="fas fa-leaf"></i>
-            <h3>Origen Natural</h3>
-            <p>Seleccionamos ingredientes puros directamente de la tierra para garantizar la máxima calidad en cada producto.</p>
+    <section id="nosotros" class="about">
+        <div class="about-text">
+            <h2>Ciencia Natural</h2>
+            <p>En JIGA LAB, desarrollamos suplementos con formulaciones de grado premium. Nuestra misión es fusionar la pureza de los ingredientes naturales con procesos tecnológicos para optimizar tu rendimiento y bienestar diario.</p>
         </div>
-        <div class="about-item">
-            <i class="fas fa-heartbeat"></i>
-            <h3>Misión Bienestar</h3>
-            <p>Buscamos mejorar tu calidad de vida ofreciendo alternativas naturales efectivas y accesibles para todos.</p>
-        </div>
-        <div class="about-item">
-            <i class="fas fa-shipping-fast"></i>
-            <h3>Atención Directa</h3>
-            <p>Te asesoramos personalmente por WhatsApp para resolver tus dudas y gestionar tus pedidos rápidamente.</p>
+        <div class="stat-grid">
+            <div class="stat-box">
+                <i class="fas fa-flask"></i>
+                <h4>Pureza</h4>
+                <p>Grado Lab</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Calidad</h4>
+                <p>Certificada</p>
+            </div>
         </div>
     </section>
 
-    <!-- Sección Catálogo -->
-    <main class="catalog-container" id="catalogo">
-        <h2 class="section-title">Nuestro Catálogo Completo</h2>
-        <div class="products-grid" id="main-grid">
-            <!-- Se cargan 200 productos aquí -->
-        </div>
+    <main id="catalogo" class="catalog">
+        <h2 class="catalog-title">// Formulación Premium</h2>
+        <div class="grid" id="main-grid"></div>
     </main>
 
     <script>
-        // Lista de bases para generar los 200 productos
-        const bases = [
-            "Sangre de Drago", "Jarabe de Totumo", "Ajo Rey", "Ortiga Mas", "Citrato de Magnesio", 
-            "Uña de Gato", "Chanca Piedra", "Cola de Caballo", "Propóleo Real", "Veneno de Abeja",
-            "Cartílago de Tiburón", "Maca Negra", "Maca Roja", "Ginkgo Biloba", "Omega 3-6-9",
-            "Cúrcuma Premium", "Pimienta Negra", "Colágeno Marino", "Vitamina E", "Biotina",
-            "Aceite de Ricino", "Aceite de Coco", "Vinagre de Manzana", "Clorofila Plus", "Spirulina",
-            "Valeriana", "Pasiflora", "Castaño de Indias", "Alcachofa Gotas", "Hercampuri",
-            "Diente de León", "Boldo", "Jarabe de Guaco", "Sangre de Toro", "Jarabe para la Tos",
-            "Neurobión Natural", "Riñon Sano", "Próstata Relax", "Vigor Macho", "Fémina Control"
-        ];
-
-        const adjetivos = ["Forte", "Plus", "Extracto Puro", "Orgánico", "Concentrado", "Premium"];
-        const precios = ["95", "120", "150", "180", "220", "280", "75", "110"];
-        const imagenes = [
-            "https://images.unsplash.com/photo-1512036667332-28a1a9e170de?w=400",
-            "https://images.unsplash.com/photo-1584017945516-9a0003bc7e0a?w=400",
-            "https://images.unsplash.com/photo-1611930528657-8ae9dd280685?w=400",
-            "https://images.unsplash.com/photo-1594488687129-76a441e6872a?w=400",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
-            "https://images.unsplash.com/photo-1607305387299-a3d961d64636?w=400"
+        // LISTA DE PRODUCTOS CON LOS NOMBRES DE TUS ARCHIVOS PNG
+        const productos = [
+            { n: "Citrato de Magnesio", p: 350, img: "CITRATO.PNG" },
+            { n: "Citrato de Potasio", p: 350, img: "CITRATO_DEPOTASIO.PNG" },
+            { n: "Colagen Complex", p: 480, img: "COLAGEN_COMPLEX.PNG" },
+            { n: "Extracto de Cúrcuma", p: 290, img: "CURCUMA.PNG" },
+            { n: "Extracto de Fenogreco", p: 310, img: "FENOGRECO_RENDER (1).PNG" },
+            { n: "Guanábana & Moringa", p: 380, img: "GUANABANA_RENDER.PNG" },
+            { n: "IsoFem Natural", p: 420, img: "ISOFEM.PNG" },
+            { n: "Silimariano", p: 360, img: "SILIMARIANO.PNG" },
+            { n: "Testo M Premium", p: 520, img: "TESTO_M.PNG" },
+            { n: "Ajo Negro", p: 280, img: "AJO_NEGRO.PNG" },
+            { n: "Vinagre de Manzana", p: 250, img: "VINAGRE.PNG" },
+            { n: "VitaFem", p: 390, img: "VITAFEM.PNG" },
+            { n: "VitaMen", p: 390, img: "VITAMEN.PNG" },
+            { n: "Vitamina C", p: 240, img: "VITC.PNG" }
         ];
 
         const grid = document.getElementById('main-grid');
-        const numWA = "521234567890"; // Reemplaza por tu número real
-
-        for (let i = 1; i <= 200; i++) {
-            const base = bases[i % bases.length];
-            const adj = adjetivos[i % adjetivos.length];
-            const nombre = `${base} ${adj}`;
-            const precio = precios[i % precios.length];
-            const img = imagenes[i % imagenes.length];
-
+        productos.forEach(p => {
             const card = document.createElement('div');
-            card.className = 'product-card';
+            card.className = 'card';
             card.innerHTML = `
-                <img src="${img}" alt="${nombre}">
-                <div class="product-info">
-                    <h3>${nombre}</h3>
-                    <p>Cuidado natural de alta potencia. Código: #NV-${1000 + i}</p>
-                    <div class="price">$${precio}.00</div>
-                </div>
-                <a href="https://wa.me/${numWA}?text=Hola, me interesa el producto: ${nombre}" target="_blank" class="btn-buy">
-                    <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
-                </a>
+                <img src="${p.img}" alt="${p.n}" onerror="this.src='https://via.placeholder.com/300x400?text=Cargando...'">
+                <h3>${p.n}</h3>
+                <div class="price">$${p.p}.00</div>
+                <a href="https://wa.me/522722295010?text=Hola JIGA LAB, me interesa: ${p.n}" target="_blank" class="btn-buy">Consultar</a>
             `;
             grid.appendChild(card);
-        }
+        });
     </script>
 
-    <footer>
-        <p>&copy; 2024 NaturaVida - Salud Natural a tu Alcance</p>
-    </footer>
-
-    <a href="https://wa.me/521234567890" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/522722295010" class="wa-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <footer>
+        <p>JIGA LAB &copy; 2026 | BIENESTAR INTEGRAL | ORIZABA, VERACRUZ</p>
+    </footer>
 
 </body>
 </html>
