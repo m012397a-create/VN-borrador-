@@ -15,20 +15,26 @@
 
         .main-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 8%; max-width: 1400px; margin: 0 auto; }
         
-        /* Columna Izquierda: Visualización */
-        .prod-display { background: var(--fondo); padding: 30px; border-radius: 4px; text-align: center; height: fit-content; }
-        .prod-display img { max-width: 100%; height: 350px; object-fit: contain; }
-        .prod-display h1 { font-weight: 200; font-size: 1.8rem; letter-spacing: 2px; text-transform: uppercase; margin: 20px 0 10px; }
-        .price { font-size: 24px; color: var(--verde); font-weight: 300; }
+        /* Columna Izquierda: Visualización y Descripción */
+        .prod-display { height: fit-content; }
+        .img-card { background: var(--fondo); padding: 30px; border-radius: 4px; text-align: center; margin-bottom: 25px; }
+        .img-card img { max-width: 100%; height: 350px; object-fit: contain; }
+        
+        .description-box { padding: 10px; border-top: 1px solid #eee; margin-top: 20px; }
+        .description-box h2 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); margin-bottom: 15px; }
+        .description-box p { font-size: 13px; line-height: 1.7; color: #555; font-weight: 300; }
+        .specs { margin-top: 15px; font-size: 12px; color: #777; list-style: none; padding: 0; }
+        .specs li { margin-bottom: 8px; display: flex; align-items: center; }
+        .specs li i { color: var(--verde); margin-right: 10px; font-size: 10px; }
 
-        /* Columna Derecha: Formulario por Pasos */
-        .checkout-form { background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 2px; }
+        /* Columna Derecha: Formulario */
+        .checkout-form { background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 2px; position: sticky; top: 100px; height: fit-content; }
         .step-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: flex; align-items: center; color: var(--verde); }
         .step-title span { background: var(--verde); color: white; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-size: 10px; }
 
         .input-group { margin-bottom: 15px; }
         label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; color: #888; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: 'Inter'; font-size: 13px; outline: none; border-radius: 2px; transition: 0.3s; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: 'Inter'; font-size: 13px; outline: none; border-radius: 2px; }
         input:focus { border-color: var(--verde); }
 
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -36,90 +42,92 @@
         .btn-wa { 
             background: var(--negro); color: white; text-decoration: none; padding: 20px; 
             display: block; text-align: center; font-size: 10px; font-weight: 600; 
-            letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; transition: 0.3s;
-            cursor: pointer; border: none; width: 100%;
+            letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; cursor: pointer; border: none; width: 100%;
         }
         .btn-wa:hover { background: var(--verde); }
 
-        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; padding: 20px; } }
+        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; padding: 20px; } .checkout-form { position: static; } }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="back"><i class="fas fa-chevron-left"></i> Volver</a>
+    <a href="index.html" class="back"><i class="fas fa-chevron-left"></i> Volver a la colección</a>
     <img src="LOGO_JIGA_LAB.png" alt="Logo" style="height: 30px;">
 </header>
 
-<div class="main-container" id="product-page">
+<div class="main-container">
+    <!-- IZQUIERDA: PRODUCTO Y DESCRIPCIÓN -->
     <div class="prod-display" id="visual-part">
-        </div>
+        <!-- Se llena con JS -->
+    </div>
 
+    <!-- DERECHA: FORMULARIO -->
     <div class="checkout-form">
-        <div class="step-title"><span>1</span> Información del Destinatario</div>
+        <div class="step-title"><span>1</span> Datos del Destinatario</div>
         <div class="input-group">
             <label>Nombre Completo</label>
-            <input type="text" id="nombre" placeholder="Quién recibe el paquete">
+            <input type="text" id="nombre" placeholder="Quién recibe">
         </div>
         <div class="input-group">
-            <label>Teléfono de Contacto</label>
+            <label>Teléfono Celular</label>
             <input type="tel" id="tel" placeholder="10 dígitos">
         </div>
 
-        <div class="step-title" style="margin-top:40px;"><span>2</span> Detalles de Entrega</div>
+        <div class="step-title" style="margin-top:30px;"><span>2</span> Dirección de Entrega</div>
         <div class="input-group">
             <label>Calle y Avenida</label>
             <input type="text" id="calle" placeholder="Nombre de la calle">
         </div>
         <div class="row">
             <div class="input-group">
-                <label>Número Exterior</label>
+                <label>Num. Exterior</label>
                 <input type="text" id="num_ext" placeholder="Ej. 123">
             </div>
             <div class="input-group">
-                <label>Número Interior (Opcional)</label>
-                <input type="text" id="num_int" placeholder="Ej. Depto 4">
+                <label>Num. Interior</label>
+                <input type="text" id="num_int" placeholder="Opcional">
             </div>
         </div>
         <div class="row">
             <div class="input-group">
-                <label>Código Postal</label>
+                <label>C.P.</label>
                 <input type="text" id="cp_envio" maxlength="5">
             </div>
             <div class="input-group">
                 <label>Colonia</label>
-                <input type="text" id="colonia" placeholder="Nombre de la colonia">
+                <input type="text" id="colonia" placeholder="Nombre de colonia">
             </div>
         </div>
         <div class="input-group">
-            <label>Referencias (Opcional)</label>
-            <textarea id="ref" rows="2" placeholder="Color de casa, entre qué calles, etc."></textarea>
+            <label>Referencia de ubicación</label>
+            <textarea id="ref" rows="2" placeholder="Color de fachada, entre qué calles, etc."></textarea>
         </div>
 
         <button onclick="enviarPedido()" class="btn-wa">
-            <i class="fab fa-whatsapp"></i> Confirmar y Enviar Datos
+            <i class="fab fa-whatsapp"></i> Confirmar Pedido
         </button>
     </div>
 </div>
 
 <script>
-    // Mismo diccionario de productos para mantener consistencia
+    // BASE DE DATOS COMPLETA CON DESCRIPCIONES SEGURAS
     const db = {
-        "CALCIODEMAGNESIO.png": { n: "Calcio, Zinc y Magnesio", p: 350 },
-        "TESTO_M.png": { n: "TestoVit", p: 520 },
-        "AJO_NEGRO.png": { n: "Ajo Negro", p: 280 },
-        "CITRATO.png": { n: "Citrato de Magnesio", p: 350 },
-        "CITRATO_DEPOTASIO.png": { n: "Citrato de Potasio", p: 350 },
-        "COLAGEN_COMPLEX.png": { n: "Colagen Complex", p: 480 },
-        "CURCUMA.png": { n: "Extracto de Cúrcuma", p: 290 },
-        "FENOGRECO_RENDER (1).png": { n: "Extracto de Fenogreco", p: 310 },
-        "GUANABANA_RENDER.png": { n: "Guanábana & Moringa", p: 380 },
-        "ISOFEM.png": { n: "IsoFem Natural", p: 420 },
-        "SILIMARIANO.png": { n: "Silimariano", p: 360 },
-        "VINAGRE.png": { n: "Vinagre de Manzana", p: 250 },
-        "VITAFEM.png": { n: "VitaFem", p: 390 },
-        "VITAMEN.png": { n: "VitaMen", p: 390 },
-        "VITC.png": { n: "Vitamina C", p: 240 }
+        "CALCIODEMAGNESIO.png": { n: "Calcio, Zinc y Magnesio", p: 350, d: "Complejo mineral esencial diseñado para el soporte del sistema óseo y muscular. La combinación de magnesio y zinc contribuye al equilibrio electrolítico y al fortalecimiento de las defensas naturales." },
+        "TESTO_M.png": { n: "TestoVit", p: 520, d: "Fórmula vigorizante natural a base de extractos botánicos. Diseñada para apoyar el rendimiento físico, la vitalidad y el equilibrio energético diario del hombre." },
+        "AJO_NEGRO.png": { n: "Ajo Negro", p: 280, d: "Extracto concentrado de ajo madurado. Rico en antioxidantes que contribuyen a la salud del sistema circulatorio y cardiovascular sin el olor característico del ajo fresco." },
+        "CITRATO.png": { n: "Citrato de Magnesio", p: 350, d: "Formulación de alta absorción que auxilia en la relajación del sistema nervioso y muscular. Ideal para personas con alta actividad física o estrés constante." },
+        "CITRATO_DEPOTASIO.png": { n: "Citrato de Potasio", p: 350, d: "Suplemento mineral que ayuda a mantener el equilibrio de líquidos y apoya la función muscular normal y el sistema nervioso." },
+        "COLAGEN_COMPLEX.png": { n: "Colagen Complex", p: 480, d: "Mezcla avanzada que favorece la elasticidad de la piel, la salud capilar y el bienestar de las articulaciones mediante nutrición interna." },
+        "CURCUMA.png": { n: "Extracto de Cúrcuma", p: 290, d: "Extracto natural con alta concentración de curcuminoides, conocidos por sus propiedades antioxidantes que apoyan el bienestar general." },
+        "FENOGRECO_RENDER (1).png": { n: "Extracto de Fenogreco", p: 310, d: "Semilla tradicionalmente utilizada para el soporte digestivo y metabólico de forma natural." },
+        "GUANABANA_RENDER.png": { n: "Guanábana & Moringa", p: 380, d: "Sinergia botánica rica en fitonutrientes que ayuda a reforzar la vitalidad del organismo y el sistema inmunológico." },
+        "ISOFEM.png": { n: "IsoFem Natural", p: 420, d: "Fórmula suave diseñada para el bienestar del organismo femenino, utilizando ingredientes de origen botánico." },
+        "SILIMARIANO.png": { n: "Silimariano", p: 360, d: "Extracto de Cardo Mariano que contribuye al buen funcionamiento y protección del sistema hepático de manera natural." },
+        "VINAGRE.png": { n: "Vinagre de Manzana", p: 250, d: "Presentación en cápsulas que facilita el consumo de los beneficios del vinagre de manzana para el metabolismo digestivo." },
+        "VITAFEM.png": { n: "VitaFem", p: 390, d: "Multivitamínico integral formulado específicamente para cubrir las demandas nutricionales diarias de la mujer." },
+        "VITAMEN.png": { n: "VitaMen", p: 390, d: "Soporte vitamínico completo para el hombre moderno, enfocado en mantener la energía y el rendimiento óptimo." },
+        "VITC.png": { n: "Vitamina C", p: 240, d: "Poderoso antioxidante que protege las células contra el daño oxidativo y refuerza las defensas naturales del cuerpo." }
     };
 
     const params = new URLSearchParams(window.location.search);
@@ -127,49 +135,52 @@
     const cpPrevia = params.get('cp') || "";
     const producto = db[imgId];
 
-    // Cargar imagen y nombre del producto seleccionado
     if (producto) {
         document.getElementById('visual-part').innerHTML = `
-            <img src="${imgId}" alt="${producto.n}">
-            <h1>${producto.n}</h1>
-            <div class="price">$${producto.p}.00</div>
-            <p style="font-size:10px; margin-top:20px; color:#999; letter-spacing:1px;">SELECCIÓN JIGA LAB PREMIUM</p>
+            <div class="img-card">
+                <img src="${imgId}" alt="${producto.n}">
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h1 style="font-weight:200; font-size:1.8rem; letter-spacing:2px; text-transform:uppercase;">${producto.n}</h1>
+                <div class="price">$${producto.p}.00</div>
+            </div>
+            <div class="description-box">
+                <h2>Descripción y Beneficios</h2>
+                <p>${producto.d}</p>
+                <ul class="specs">
+                    <li><i class="fas fa-check"></i> Origen 100% Natural</li>
+                    <li><i class="fas fa-check"></i> Calidad de Exportación</li>
+                    <li><i class="fas fa-check"></i> Sin conservadores artificiales</li>
+                </ul>
+            </div>
         `;
         document.getElementById('cp_envio').value = cpPrevia;
     }
 
     function enviarPedido() {
-        // Recolectar datos del formulario
         const nombre = document.getElementById('nombre').value;
         const tel = document.getElementById('tel').value;
         const calle = document.getElementById('calle').value;
         const n_ext = document.getElementById('num_ext').value;
-        const n_int = document.getElementById('num_int').value;
         const cp = document.getElementById('cp_envio').value;
         const col = document.getElementById('colonia').value;
-        const ref = document.getElementById('ref').value;
 
         if(!nombre || !calle || !cp || !col) {
-            alert("Por favor rellena los campos principales para el envío.");
+            alert("Por favor rellena los datos de envío.");
             return;
         }
 
-        // Construir el mensaje de WhatsApp
         let mensaje = `*NUEVO PEDIDO JIGA LAB*%0A`;
         mensaje += `--------------------------%0A`;
         mensaje += `*Producto:* ${producto.n}%0A`;
-        mensaje += `*Precio:* $${producto.p}.00%0A%0A`;
         mensaje += `*DATOS DE ENVÍO*%0A`;
-        mensaje += `*Destinatario:* ${nombre}%0A`;
-        mensaje += `*Teléfono:* ${tel}%0A`;
-        mensaje += `*Dirección:* ${calle} #${n_ext}${n_int ? ', Int. ' + n_int : ''}%0A`;
+        mensaje += `*Nombre:* ${nombre}%0A`;
+        mensaje += `*Tel:* ${tel}%0A`;
+        mensaje += `*Dirección:* ${calle} #${n_ext}%0A`;
         mensaje += `*Colonia:* ${col}%0A`;
         mensaje += `*C.P.:* ${cp}%0A`;
-        if(ref) mensaje += `*Referencia:* ${ref}%0A`;
-        mensaje += `--------------------------%0A`;
-        mensaje += `_Enviado desde el portal JIGA LAB_`;
+        mensaje += `--------------------------`;
 
-        // Abrir WhatsApp con el número que ya tienes
         window.open(`https://wa.me/522722295010?text=${mensaje}`, '_blank');
     }
 </script>
