@@ -9,12 +9,13 @@
     <style>
         :root { 
             --verde-salvia: #8a9a5b; 
+            --verde-claro: #f0f2eb;
             --negro: #1a1a1a; 
             --fondo: #fdfdfb; 
-            --max-width: 1200px; /* Ancho máximo para que no se estire en PC */
+            --max-width: 1100px; 
         }
         
-        /* Gestión de Cursor */
+        /* Gestión de Cursor: Solo visible en PC */
         @media (min-width: 1025px) {
             * { cursor: none !important; }
             #cursor-dot, #cursor-outline { display: block; }
@@ -26,58 +27,60 @@
 
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--fondo); color: var(--negro); overflow-x: hidden; }
         
-        /* Cursor */
-        #cursor-dot { width: 8px; height: 8px; background: var(--verde-salvia); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
-        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--verde-salvia); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: transform 0.1s ease-out; }
+        /* Cursor Personalizado */
+        #cursor-dot { width: 8px; height: 8px; background: var(--verde-salvia); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; display: none; }
+        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--verde-salvia); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: transform 0.1s ease-out; display: none; }
 
-        /* HEADER CENTRALIZADO */
+        /* HEADER */
         header { 
-            background: rgba(255,255,255,0.9); 
+            background: rgba(255,255,255,0.92); 
             backdrop-filter: blur(10px); 
             position: sticky; 
             top: 0; 
             z-index: 1000; 
             border-bottom: 1px solid rgba(0,0,0,0.05);
             display: flex;
-            justify-content: center; /* Centra el contenido interno */
+            justify-content: center;
         }
 
         .header-container {
             width: 100%;
             max-width: var(--max-width);
-            padding: 15px 20px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .logo img { height: 45px; transition: 0.3s; }
+        .logo img { height: 40px; }
 
         nav { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--negro); margin-left: 25px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 300; transition: 0.3s; }
+        .nav-links a { text-decoration: none; color: var(--negro); margin-left: 25px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 300; transition: 0.3s; }
         .nav-links a:hover { color: var(--verde-salvia); }
         
         .header-icons { display: flex; align-items: center; margin-left: 20px; border-left: 1px solid #eee; padding-left: 20px; }
-        .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); }
+        .header-icons a { margin-left: 15px; font-size: 16px; color: var(--negro); transition: 0.3s; }
+        .header-icons a:hover { color: var(--verde-salvia); }
 
-        /* SLIDER AJUSTADO */
+        /* SLIDER */
         .hero { 
             position: relative; 
-            height: 60vh; /* Bajamos la altura para que no sea eterno en PC */
+            height: 55vh; 
             background: var(--negro); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            overflow: hidden;
         }
-        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; }
         .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
         
         .hero-content { position: relative; z-index: 10; text-align: center; color: #fff; padding: 0 20px; }
-        .hero-content h1 { font-weight: 200; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        .hero-content p { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-top: 20px; color: var(--verde-salvia); }
+        .hero-content h1 { font-weight: 200; font-size: clamp(1.8rem, 5vw, 3.5rem); letter-spacing: 12px; text-transform: uppercase; margin: 0; }
+        .hero-content p { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 15px; color: var(--verde-claro); opacity: 0.8; }
 
-        /* PRODUCTOS EN CONTENEDOR */
+        /* GRID DE PRODUCTOS */
         .main-content {
             max-width: var(--max-width);
             margin: 0 auto;
@@ -86,28 +89,37 @@
 
         .product-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
             gap: 30px; 
         }
 
         .product-card { 
-            background: #fff; padding: 30px; border: 1px solid #f0f0f0; border-radius: 12px;
-            text-align: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            background: #fff; padding: 30px; border: 1px solid #f2f2f2; border-radius: 4px;
+            text-align: center; transition: 0.4s ease; 
             position: relative; top: 0;
         }
-        .product-card:hover { top: -10px; border-color: var(--verde-salvia); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-        .product-card img { width: 100%; max-height: 220px; object-fit: contain; margin-bottom: 20px; }
-        
-        /* FOOTER FORMAL */
-        footer { background: #fff; padding: 60px 20px; text-align: center; border-top: 1px solid #eee; }
-        .footer-logo img { height: 50px; margin-bottom: 30px; filter: grayscale(100%); opacity: 0.6; }
+        .product-card:hover { top: -10px; border-color: var(--verde-salvia); box-shadow: 0 15px 35px rgba(138, 154, 91, 0.1); }
+        .product-card img { width: 100%; max-height: 200px; object-fit: contain; margin-bottom: 20px; }
+        .product-card h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; min-height: 40px; margin: 0; color: #333; }
+        .price { font-size: 18px; color: var(--verde-salvia); margin: 15px 0; font-weight: 400; }
+        .btn-ver { background: var(--negro); color: #fff; border: none; padding: 12px; width: 100%; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
+        .product-card:hover .btn-ver { background: var(--verde-salvia); }
 
-        /* RESPONSIVE MÓVIL */
+        /* FOOTER */
+        footer { background: #fff; padding: 80px 20px 40px; text-align: center; border-top: 1px solid #eee; }
+        .footer-logo img { height: 45px; margin-bottom: 30px; filter: grayscale(100%); opacity: 0.7; }
+        .legal { font-size: 9px; color: #bbb; max-width: 700px; margin: 0 auto; line-height: 1.8; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* AJUSTES MÓVIL */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero { height: 50vh; }
-            .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-            .logo img { height: 35px; }
+            .hero { height: 45vh; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .product-card { padding: 15px; }
+            .product-card img { max-height: 140px; }
+            .product-card h3 { font-size: 9px; min-height: 30px; }
+            .price { font-size: 15px; }
+            .logo img { height: 32px; }
         }
     </style>
 </head>
@@ -122,14 +134,14 @@
         <nav>
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
-                <a href="#productos">Productos</a>
+                <a href="#productos">Colección</a>
             </div>
             <div class="header-icons">
                 <a href="https://www.instagram.com/jigalab6" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://wa.me/522722295010" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="carrito.html" style="color: var(--verde-salvia); position: relative;">
                     <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" style="position: absolute; top: -10px; right: -10px; background: #000; color: #fff; font-size: 9px; padding: 2px 5px; border-radius: 10px;">0</span>
+                    <span id="cart-count" style="position: absolute; top: -10px; right: -10px; background: #000; color: #fff; font-size: 8px; padding: 2px 5px; border-radius: 10px;">0</span>
                 </a>
             </div>
         </nav>
@@ -137,8 +149,10 @@
 </header>
 
 <section class="hero">
+    <!-- Imágenes con tonos verdes y naturaleza -->
     <div class="slide active"><img src="https://images.pexels.com/photos/113335/pexels-photo-113335.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
     <div class="slide"><img src="https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
+    <div class="slide"><img src="https://images.pexels.com/photos/3616764/pexels-photo-3616764.jpeg?auto=compress&cs=tinysrgb&w=1600"></div>
     <div class="hero-content">
         <h1>JIGA LAB</h1>
         <p>Pureza botánica · Biotecnología avanzada</p>
@@ -151,30 +165,46 @@
 
 <footer>
     <div class="footer-logo"><img src="LOGO_JIGA_LAB.png"></div>
-    <div style="font-size: 10px; color: #aaa; letter-spacing: 1px; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-        "ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."
-    </div>
+    <p class="legal">
+        "ESTE PRODUCTO NO ES UN MEDICAMENTO. EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."<br><br>
+        AVISO DE COFEPRIS 2026 | JIGA LAB MÉXICO
+    </p>
 </footer>
 
 <script>
     const productos = [
-        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Fortalece huesos y músculos." },
-        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Salud renal y equilibrio mineral." },
-        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Antioxidante y salud cardiovascular." },
-        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Bienestar nervioso y muscular." }
-        // Agrega aquí los demás de tu lista...
+        { img: "CALCIODEMAGNESIO.png", n: "Calcio, Zinc y Magnesio", p: 350, d: "Fortalece la densidad ósea y mejora la recuperación muscular." },
+        { img: "TESTO_M.png", n: "TestoVit", p: 520, d: "Potenciador natural para optimizar la vitalidad masculina." },
+        { img: "AJO_NEGRO.png", n: "Ajo Negro", p: 280, d: "Antioxidante superior para la salud cardiovascular." },
+        { img: "CITRATO.png", n: "Citrato de Magnesio", p: 350, d: "Alta absorción para reducir estrés y calambres." },
+        { img: "CITRATO_DEPOTASIO.png", n: "Citrato de Potasio", p: 350, d: "Apoyo vital para función renal y electrolitos." },
+        { img: "COLAGEN_COMPLEX.png", n: "Colagen Complex", p: 480, d: "Nutre piel, cabello y refuerza articulaciones." },
+        { img: "CURCUMA.png", n: "Extracto de Cúrcuma", p: 290, d: "Potente antiinflamatorio natural concentrado." },
+        { img: "FENOGRECO_RENDER (1).png", n: "Fenogreco", p: 310, d: "Apoyo al equilibrio hormonal y digestión." },
+        { img: "GUANABANA_RENDER.png", n: "Guanábana & Moringa", p: 380, d: "Eleva defensas y protege la salud celular." },
+        { img: "ISOFEM.png", n: "IsoFem Natural", p: 420, d: "Equilibrio hormonal femenino natural." },
+        { img: "SILIMARIANO.png", n: "Silimariano", p: 360, d: "Protector y regenerador hepático premium." },
+        { img: "VINAGRE.png", n: "Vinagre de Manzana", p: 250, d: "Auxiliar en digestión y control de peso." },
+        { img: "VITAFEM.png", n: "VitaFem", p: 390, d: "Multivitamínico integral para la mujer." },
+        { img: "VITAMEN.png", n: "VitaMen", p: 390, d: "Complejo vitamínico optimizado para el hombre." },
+        { img: "VITC.png", n: "Vitamina C", p: 240, d: "Esencial para colágeno e inmunidad." }
     ];
 
     const grid = document.getElementById('grid');
     productos.forEach(p => {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.innerHTML = `<img src="${p.img}"><h3>${p.n}</h3><div class="price">$${p.p}.00</div><button style="background:var(--negro);color:#fff;border:none;padding:10px;width:100%;font-size:10px;letter-spacing:1px;border-radius:5px;">DETALLES</button>`;
-        card.onclick = () => window.location.href = `producto.html?img=${p.img}&nombre=${p.n}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
+        card.innerHTML = `
+            <img src="${p.img}">
+            <h3>${p.n}</h3>
+            <div class="price">$${p.p}.00</div>
+            <button class="btn-ver">DETALLES</button>
+        `;
+        card.onclick = () => window.location.href = `producto.html?img=${p.img}&nombre=${encodeURIComponent(p.n)}&precio=${p.p}&desc=${encodeURIComponent(p.d)}`;
         grid.appendChild(card);
     });
 
-    // Lógica de Cursor PC
+    // Lógica del Cursor solo en PC
     if (window.innerWidth > 1024) {
         const dot = document.getElementById("cursor-dot");
         const out = document.getElementById("cursor-outline");
@@ -184,14 +214,20 @@
         });
     }
 
-    function updateCartCount() {
+    function updateCart() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         document.getElementById('cart-count').innerText = cart.reduce((a, b) => a + b.qty, 0);
     }
-    updateCartCount();
+    updateCart();
 
-    let cur = 0; const s = document.querySelectorAll('.slide');
-    setInterval(() => { s[cur].classList.remove('active'); cur = (cur + 1) % s.length; s[cur].classList.add('active'); }, 5000);
+    // Slider Automático
+    let cur = 0; 
+    const slides = document.querySelectorAll('.slide');
+    setInterval(() => {
+        slides[cur].classList.remove('active');
+        cur = (cur + 1) % slides.length;
+        slides[cur].classList.add('active');
+    }, 5000);
 </script>
 </body>
 </html>
